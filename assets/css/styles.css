@@ -197,10 +197,10 @@ img {
     }
 }
 
-.nav__list{
+/* .nav__list{
     grid-template-columns: repeat(3, lfr);
     gap: rem;
-}
+} */
 
 
 .nav__link{
