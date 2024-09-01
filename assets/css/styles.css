@@ -275,7 +275,7 @@ img {
 
 .home__blob{
   width: 300px;
-  height: 200px;
+  height: 300px;
   fill: var(--first-color);
 }
 
@@ -386,7 +386,7 @@ img {
 .about__info-title,
 .about__info-name{
   display: block;
-  text-align: center;
+  text-align: justify;
 }
 
 .about__buttons{
