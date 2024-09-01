@@ -1,4 +1,5 @@
 /*==================== MENU SHOW Y HIDDEN ====================*/
+
 const navMenu = document.getElementById('nav-menu'),
         navToggle = document.getElementById('nav-toggle'),
         navClose = document.getElementById('nav-close')
@@ -30,10 +31,8 @@ function linkAction(){
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
-/*==================== ACCORDION SKILLS ====================*/
-
-
 /*==================== QUALIFICATION TABS ====================*/
+
 const tabs = document.querySelectorAll('[data-target]'),
     tabContents = document.querySelectorAll('[data-content]')
 
@@ -55,11 +54,21 @@ tabs.forEach(tab =>{
 /*==================== SERVICES MODAL ====================*/
 
 
-/*==================== PORTFOLIO SWIPER  ====================*/
+/*==================== HIGHLIGHTS SWIPER  ====================*/
 
+let swiper = new Swiper('.highlight__container', {
+  cssMode: true,
+  loop: true,
 
-/*==================== TESTIMONIAL ====================*/
-
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});
 
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll('section[id]')
