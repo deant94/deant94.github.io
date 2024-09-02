@@ -383,6 +383,7 @@ img {
 
 .highlight__description{
   margin-bottom: var(--mb-0-75);
+  text-align: justify;
 }
 
 .highlight__button:hover .button__icon{
@@ -528,7 +529,7 @@ img {
   display: none;
 }
 
-.qualification__ative[data-content]{
+.qualification__active[data-content]{
   display: block;
 }
 
@@ -715,7 +716,7 @@ img {
   }
   .about__container,
   .skills__container,
-  .publications_content,
+  .publications__content,
   .contact__container,
   .footer__container{
     grid-template-columns: repeat(2, 1fr);
@@ -767,7 +768,8 @@ img {
     display: flex;
     column-gap: 2rem;
   }
-  .nav__menu{margin-left: auto;
+  .nav__menu{
+    margin-left: auto;
   }
   .change-theme{
     margin: 0;
@@ -815,11 +817,11 @@ img {
   .publication__img{
     width: 320px;
   }
-  .publications_content{
+  .publications__content{
     align-items: center;
   }
   .footer__container{
-    grid-template-columns: repeat(3 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .footer__bg{
     padding: 3rem 0 3.5rem;
@@ -828,7 +830,7 @@ img {
     flex-direction: row;
     column-gap: 2rem;
   }
-  .footer__socials{
+  .footer__social{
     justify-self: flex-end;
   }
 }
@@ -866,7 +868,7 @@ img {
   .contact__form{
     width: 460px;
   }
-  .contact__input{
+  .contact__inputs{
     grid-template-columns: repeat(2, 1fr);
   }
 
