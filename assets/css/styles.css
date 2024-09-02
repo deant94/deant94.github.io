@@ -489,11 +489,11 @@ img {
 /*==================== SKILLS ====================*/
 
 
-/*==================== QUALIFICATION ====================*/
+/*==================== HISTORY ====================*/
 .qualification__tabs{
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: var(--mb-2);
+  margin-bottom: var(--mb-1);
 }
 
 .qualification__button{
@@ -525,7 +525,6 @@ img {
 .qualification__subtitle{
   display: inline-block;
   font-size: var(--small-font-size);
-  margin-bottom: var(--mb-1);
 }
 
 .qualification__calendar{
