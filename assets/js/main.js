@@ -31,7 +31,7 @@ function linkAction(){
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
-/*==================== QUALIFICATION TABS ====================*/
+/*==================== history TABS ====================*/
 
 const tabs = document.querySelectorAll('[data-target]'),
     tabContents = document.querySelectorAll('[data-content]')
@@ -41,20 +41,20 @@ tabs.forEach(tab =>{
         const target = document.querySelector(tab.dataset.target)
 
         tabContents.forEach(tabContent =>{
-            tabContent.classList.remove('qualification__active')
+            tabContent.classList.remove('history__active')
         })
-        target.classList.add('qualification__active')
+        target.classList.add('history__active')
 
         tabs.forEach(tab =>{
-            tab.classList.remove('qualification__active')
+            tab.classList.remove('history__active')
         })
-        tab.classList.add('qualification__active')
+        tab.classList.add('history__active')
     })
 })
-/*==================== SERVICES MODAL ====================*/
-const modalViews = document.querySelectorAll('.services__modal'),
-      modalBtns = document.querySelectorAll('.services__button'),
-      modalCloses = document.querySelectorAll('.services__modal-close')
+/*==================== publications MODAL ====================*/
+const modalViews = document.querySelectorAll('.publications__modal'),
+      modalBtns = document.querySelectorAll('.publications__button'),
+      modalCloses = document.querySelectorAll('.publications__modal-close')
 
 let modal = function(modalClick){
     modalViews[modalClick].classList.add('active-modal')
