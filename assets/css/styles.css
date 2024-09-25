@@ -457,7 +457,15 @@ img {
 }
 
 .highlight__img{
+  width: fit-content;
+  /* height: auto; */
+  border-radius: .5rem;
+  justify-self: center;
+}
+
+.highlight__video{
   width: 512px;
+  height:490px;
   border-radius: .5rem;
   justify-self: center;
 }
@@ -506,6 +514,11 @@ img {
 .swiper-button-next,
 .swiper-pagination-bullets{
   outline: none;
+}
+
+.iframe{
+  width: 350px,
+  height: 290px,
 }
 
 /*==================== ABOUT ====================*/
