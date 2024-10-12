@@ -993,7 +993,7 @@ article .icon {
 /*========== SCROLL BAR ==========*/
 
 ::-webkit-scrollbar{
-  width: .6rem;
+  width: .8rem;
   background-color: var(--scroll-bar-color);
   border-radius: .5rem;
 }
