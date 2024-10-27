@@ -538,7 +538,8 @@ img {
 
 /*==================== ABOUT ====================*/
 .about__img{
-  width: 200px;
+  width:100%;
+  height: auto;
   border-radius: .5rem;
   justify-self: center;
   align-self: center;
@@ -546,7 +547,9 @@ img {
 
 .about__description{
   text-align: justify;
-  margin-bottom: var(--mb-2-5);
+  margin-bottom: var(--mb-0-25);
+  margin: 0 auto;
+  /* max-width: 95%; */
 }
 
 .about__info-title{
@@ -1148,10 +1151,11 @@ article .icon {
     column-gap: 5rem;
   }
   .about__img{
-    width: 350px;
+    width:100%;
+    height: auto;
   }
   .about__description{
-    text-align: initial;
+    text-align: justify;
   }
   .about__info{
     justify-content: space-between;
