@@ -129,31 +129,41 @@ window.addEventListener('scroll', scrollUp)
 
 /*==================== DARK LIGHT THEME ====================*/ 
 
-const themeButton = document.getElementById('theme-button')
-const darkTheme = 'dark-theme'
-const iconTheme = 'uil-sun'
+const themeButton = document.getElementById('theme-button');
+const themeImage = document.getElementById('theme-image');
+const darkTheme = 'dark-theme';
+const iconTheme = 'uil-sun';
 
-// Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
+// SVG image files for light and dark themes
+const darkThemeImageSrc = 'assets/img/dt_pdark.svg';
+const lightThemeImageSrc = 'assets/img/dt_plight.svg';
 
-// We obtain the current theme that the interface has by validating the dark-theme class
-const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
+// Check previously selected theme (if any)
+const selectedTheme = localStorage.getItem('selected-theme');
+const selectedIcon = localStorage.getItem('selected-icon');
 
-// We validate if the user previously chose a topic
+// Get current theme and icon
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun';
+
+// Apply the previously selected theme
 if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-  themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
+  themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme);
+  themeImage.src = selectedTheme === 'dark' ? darkThemeImageSrc : lightThemeImageSrc;
 }
 
-// Activate / deactivate the theme manually with the button
+// Toggle theme manually with the button
 themeButton.addEventListener('click', () => {
-    // Add or remove the dark / icon theme
-    document.body.classList.toggle(darkTheme)
-    themeButton.classList.toggle(iconTheme)
-    // We save the theme and the current icon that the user chose
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
-})
+    // Toggle theme classes
+    document.body.classList.toggle(darkTheme);
+    themeButton.classList.toggle(iconTheme);
+    
+    // Update the SVG image source based on the new theme
+    themeImage.src = getCurrentTheme() === 'dark' ? darkThemeImageSrc : lightThemeImageSrc;
+    
+    // Save the user's theme and icon choice
+    localStorage.setItem('selected-theme', getCurrentTheme());
+    localStorage.setItem('selected-icon', getCurrentIcon());
+});
+

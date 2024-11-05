@@ -309,7 +309,7 @@ img {
 }
 
 .home__blob-img{
-  width: 110px;
+  width: 130px;
 }
 
 .home__data{
@@ -902,6 +902,7 @@ article .icon {
 .contact__title{
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
+  color: #fff;
 }
 
 .contact__subtitle{
