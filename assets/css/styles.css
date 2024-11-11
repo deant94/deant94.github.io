@@ -583,25 +583,37 @@ img {
 
 
 /*==================== HISTORY ====================*/
-.history__tabs{
+/* .history__tabs{
   display: flex;
   justify-content: space-evenly;
   margin-bottom: var(--mb-1);
+} */
+
+.history__tabs {
+  display: grid;
+  grid-template-columns: repeat(1, 0.2fr);
+  gap: 1rem; /* Optional: for spacing between items */
+  margin-bottom: var(--mb-2);
 }
 
-.history__button{
+.history__button {
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
   cursor: pointer;
+  display: flex;
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  text-align: center; /* Center-align text inside the button */
 }
 
-.history__button:hover{
+.history__button:hover {
   color: var(--first-color);
 }
 
-.history__icon{
+.history__icon {
   font-size: 1.8rem;
-  margin-right: var(--mb-0-25);
+  margin-bottom: var(--mb-0-25); /* Changed to margin-bottom to stack vertically */
 }
 
 .history__data{
@@ -1028,7 +1040,7 @@ article .icon {
 
 /*==================== MEDIA QUERIES ====================*/
 /* For small devices */
-@media screen and (max-width: 350px){
+@media screen and (min-width: 350px){
   .container{
     margin-left: var(--mb-1);
     margin-right: var(--mb-1);
@@ -1058,6 +1070,14 @@ article .icon {
   .project_img{
     width: 200px;
   }
+  .history__tabs {
+    grid-template-columns: 1fr; /* Change to a single column */
+    grid-template-rows: repeat(4, auto); /* Set to 4 rows to stack items vertically */
+    gap: 0.5rem; /* Adjust gap for smaller spacing if desired */
+  }
+  .home__img{
+    justify-self: center;
+  }
 }
 
 /* For medium devices */
@@ -1071,6 +1091,11 @@ article .icon {
   .home__img{
     order: 1;
     justify-self: center;
+  }
+  .history__tabs {
+    grid-template-columns: 1fr; /* Change to a single column */
+    grid-template-rows: repeat(4, auto); /* Set to 4 rows to stack items vertically */
+    gap: 0.5rem; /* Adjust gap for smaller spacing if desired */
   }
   .about__container,
   .skills__container,
