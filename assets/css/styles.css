@@ -583,28 +583,29 @@ img {
 
 
 /*==================== HISTORY ====================*/
-/* .history__tabs{
+.history__tabs{
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: var(--mb-2-5);
+}
+
+/* .history__tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; Optional, for spacing between items
   margin-bottom: var(--mb-1);
 } */
 
-.history__tabs {
-  display: grid;
-  grid-template-columns: repeat(1, 0.2fr);
-  gap: 1rem; /* Optional: for spacing between items */
-  margin-bottom: var(--mb-2);
-}
-
 .history__button {
+  display: flex;
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center;    /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  text-align: center;     /* Center-align text inside the flex container */
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
   cursor: pointer;
-  display: flex;
-  flex-direction: column; /* Stack icon and text vertically */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-  text-align: center; /* Center-align text inside the button */
+}
 }
 
 .history__button:hover {
@@ -1075,6 +1076,8 @@ article .icon {
     grid-template-rows: repeat(4, auto); /* Set to 4 rows to stack items vertically */
     gap: 0.5rem; /* Adjust gap for smaller spacing if desired */
   }
+
+  
   .home__img{
     justify-self: center;
   }
