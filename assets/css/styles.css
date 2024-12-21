@@ -579,9 +579,6 @@ img {
   justify-content: center;
 }
 
-/*==================== SKILLS ====================*/
-
-
 /*==================== HISTORY ====================*/
 .history__tabs{
   display: flex;
@@ -597,6 +594,22 @@ img {
 } */
 
 .history__button {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  padding: 0.1rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--container-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.history__content {
   display: flex;
   flex-direction: column; /* Stack icon and text vertically */
   align-items: center;    /* Center items vertically */
@@ -604,11 +617,32 @@ img {
   text-align: center;     /* Center-align text inside the flex container */
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
-  cursor: pointer;
-}
+  width: 100%;            /* Ensure it fills the parent container */
+  max-width: 1400px;      /* Set a maximum width for larger screens */
+  margin: 0 auto;         /* Center it within the parent */
+  padding: 1rem;          /* Add padding for spacing */
+  box-sizing: border-box; /* Include padding in the width calculation */
 }
 
+.history__section {
+  display: flex;
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center;    /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  text-align: center;     /* Center-align text inside the flex container */
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+  width: 100%;            /* Ensure it fills the parent container */
+  max-width: 1400px;      /* Set a maximum width for larger screens */
+  margin: 0 auto;         /* Center it within the parent */
+  padding: 1rem;          /* Add padding for spacing */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+
 .history__button:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,.15);
+  transform: translateY(-2px);
   color: var(--first-color);
 }
 
@@ -640,15 +674,15 @@ img {
 
 .history__rounder{
   display: inline-block;
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   background-color: var(--first-color);
   border-radius: 50%;
 }
 
 .history__line{
   display: block;
-  width: 1px;
+  width: 3px;
   height: 100%;
   background-color: var(--first-color);
   transform: translate(6px,-7px);
@@ -870,27 +904,27 @@ article .icon {
 /*==================== PROJECTS ====================*/
 
 
-#projects {
+#projects{
   position: relative;
 }
 
-.color-container {
+.color__container {
   border-color: rgb(163, 163, 163);
   background: rgb(250, 250, 250);
 }
 
-.project-img {
+.project__img {
   border-radius: 2rem;
   width: 90%;
   height: 90%;
 }
 
-.project-title {
+.project__title {
   margin: 1rem;
   color: black;
 }
 
-.project-btn {
+.project__btn {
   color: black;
   border-color: rgb(163, 163, 163);
 }
@@ -1041,12 +1075,11 @@ article .icon {
 
 /*==================== MEDIA QUERIES ====================*/
 /* For small devices */
-@media screen and (min-width: 350px){
+@media screen and (min-width: 250px){
   .container{
     margin-left: var(--mb-1);
     margin-right: var(--mb-1);
   }
-
   .nav__menu{
     padding: 2rem .25rem 4rem;
   }
@@ -1054,7 +1087,7 @@ article .icon {
     column-gap: 0;
   }
   .publications__container{
-    grid-template-columns: repeat(1, 1fr)
+    grid-template-columns: repeat(1, 1fr);
   }
   .home__content{
     grid-template-columns: .25fr 3fr;
@@ -1062,24 +1095,23 @@ article .icon {
   .home__blob{
     width: 180px;
   }
-  .skills_title{
-    font-size: var(--normal-font-size);
-  }
   .history__data{
     gap: .5rem;
   }
-  .project_img{
+  .project__img{
     width: 200px;
   }
   .history__tabs {
-    grid-template-columns: 1fr; /* Change to a single column */
-    grid-template-rows: repeat(4, auto); /* Set to 4 rows to stack items vertically */
-    gap: 0.5rem; /* Adjust gap for smaller spacing if desired */
+    display: grid; /* Enables grid layout */
+    grid-template-columns: 1fr; /* Single column */
+    grid-template-rows: repeat(4, auto); /* Four rows, each sized automatically */
+    gap: 1rem; /* Spacing between rows */
   }
-
-  
   .home__img{
     justify-self: center;
+  }
+  .publications__content{
+    align-items: center;
   }
 }
 
@@ -1101,7 +1133,6 @@ article .icon {
     gap: 0.5rem; /* Adjust gap for smaller spacing if desired */
   }
   .about__container,
-  .skills__container,
   .publications__content,
   .contact__container,
   .footer__container{
@@ -1111,6 +1142,9 @@ article .icon {
     display: grid;
     grid-template-columns: .6fr;
     justify-content: center;
+  }
+  .publications__container{
+    grid-template-columns: repeat(2, 2fr);
   }
 }
 
@@ -1192,14 +1226,17 @@ article .icon {
   .about__buttons{
     justify-content: initial;
   }
-  .history__tabs{
-    justify-content: center;
-  }
   .history__button{
     margin: 0 var(--mb-1);
   }
   .history__sections{
     grid-template-columns: .5fr;
+  }
+  .history__tabs {
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-template-rows: repeat(2, auto); /* Two rows */
+    gap: 1rem; /* Adjust spacing for larger screens */
   }
   .publication__img{
     width: 320px;
@@ -1243,7 +1280,12 @@ article .icon {
   .publications__content{
     column-gap: 5rem;
   }
-  
+  .history__tabs {
+    display: grid; /* Enables grid layout */
+    grid-template-columns: repeat(4, 1fr); /* Four columns of equal width */
+    grid-template-rows: 1fr; /* Single row */
+    gap: 0.5rem; /* Spacing between columns */    
+  }
   .swiper-highlight-icon{
     font-size: 3.5rem;
   }
