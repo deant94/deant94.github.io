@@ -764,31 +764,39 @@ img {
   transition: 0.5s;
 }
 
-.publications__modal-content{
-  position:relative;
+.publications__modal-content {
+  position: relative;
   background-color: var(--container-color);
   padding: 1.5rem;
-  border-radius: .5rem;
-  vertical-align: middle;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.publications__modal-publications {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.publications__modal-service {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.publications__modal-publications{
-  row-gap: 1rem;
-}
-
-.publications__modal-service{
-  display: flex;
-}
-
-.publications__modal-title{
+.publications__modal-title {
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
   margin-bottom: var(--mb-1-5);
+  text-align: center;
 }
 
-.publications__modal-close{
+.publications__modal-close {
   position: absolute;
   top: -0.5rem;
   right: 0rem;
@@ -797,10 +805,11 @@ img {
   cursor: pointer;
 }
 
-.publications__modal-icon{
+.publications__modal-icon {
   color: var(--first-color);
   margin-right: var(--mb-0-25);
 }
+
 
 /* Active Modal */
 .active-modal{
