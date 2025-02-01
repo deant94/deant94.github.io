@@ -131,12 +131,15 @@ window.addEventListener('scroll', scrollUp)
 
 const themeButton = document.getElementById('theme-button');
 const themeImage = document.getElementById('theme-image');
+const researchInterestImage = document.querySelector('.about__researchinterestimg');
 const darkTheme = 'dark-theme';
 const iconTheme = 'uil-sun';
 
 // SVG image files for light and dark themes
 const darkThemeImageSrc = 'assets/img/dt_pdark.svg';
 const lightThemeImageSrc = 'assets/img/dt_plight.svg';
+const darkResearchInterestImageSrc = 'assets/img/researchinterestdark.svg';
+const lightResearchInterestImageSrc = 'assets/img/researchinterest.svg';
 
 // Check previously selected theme (if any)
 const selectedTheme = localStorage.getItem('selected-theme');
@@ -151,6 +154,7 @@ if (selectedTheme) {
   document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
   themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme);
   themeImage.src = selectedTheme === 'dark' ? darkThemeImageSrc : lightThemeImageSrc;
+  researchInterestImage.src = selectedTheme === 'dark' ? darkResearchInterestImageSrc : lightResearchInterestImageSrc;
 }
 
 // Toggle theme manually with the button
@@ -159,8 +163,9 @@ themeButton.addEventListener('click', () => {
     document.body.classList.toggle(darkTheme);
     themeButton.classList.toggle(iconTheme);
     
-    // Update the SVG image source based on the new theme
+    // Update the SVG image sources based on the new theme
     themeImage.src = getCurrentTheme() === 'dark' ? darkThemeImageSrc : lightThemeImageSrc;
+    researchInterestImage.src = getCurrentTheme() === 'dark' ? darkResearchInterestImageSrc : lightResearchInterestImageSrc;
     
     // Save the user's theme and icon choice
     localStorage.setItem('selected-theme', getCurrentTheme());
