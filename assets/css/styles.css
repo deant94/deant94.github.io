@@ -980,7 +980,7 @@ article .icon {
 .contact__title{
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
-  color: #fff;
+  /* color: #fff; */
 }
 
 .contact__subtitle{
