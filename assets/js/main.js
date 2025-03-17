@@ -136,8 +136,8 @@ const darkTheme = 'dark-theme';
 const iconTheme = 'uil-sun';
 
 // SVG image files for light and dark themes
-const darkThemeImageSrc = 'assets/img/dt_pdark.svg';
-const lightThemeImageSrc = 'assets/img/dt_plight.svg';
+const darkThemeImageSrc = 'assets/img/dt_ld.svg';
+const lightThemeImageSrc = 'assets/img/dt_ld.svg';
 const darkResearchInterestImageSrc = 'assets/img/researchinterestdark.svg';
 const lightResearchInterestImageSrc = 'assets/img/researchinterest.svg';
 

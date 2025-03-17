@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="34.000004mm"
+   height="47.25mm"
+   viewBox="0 0 170.00002 236.25"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs1"><marker
+       style="overflow:visible"
+       id="Square"
+       refX="-3"
+       refY="0"
+       orient="auto"
+       markerWidth="6"
+       markerHeight="5"
+       viewBox="0 0 1 1"
+       preserveAspectRatio="none"
+       markerUnits="userSpaceOnUse"><path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M -5,-5 V 5 H 5 V -5 Z"
+         id="path18" /></marker><marker
+       style="overflow:visible"
+       id="Square-4"
+       refX="-2"
+       refY="0"
+       orient="auto"
+       markerWidth="7"
+       markerHeight="5"
+       viewBox="0 0 1 1"
+       preserveAspectRatio="none"
+       markerUnits="userSpaceOnUse"><path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M -5,-5 V 5 H 5 V -5 Z"
+         id="path18-5" /></marker></defs><g
+     id="layer1"
+     transform="translate(-1053.8704,-474.35286)"><g
+       id="g19-0"
+       transform="translate(615.64705,209.35302)"><g
+         id="g20-9"><g
+           id="g1"><path
+             style="fill:none;stroke:#6e57e0;stroke-width:25;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Square)"
+             d="m 560.72335,312.49984 -75,75 c -35,35 -35,40.00001 0,75 35,34.99999 40,34.99999 75,0 35,-34.99999 35,-40 0,-75"
+             id="path7-3-7-9-4-4-2-9-3-2" /><path
+             style="fill:#333333;stroke:#6e57e0;stroke-width:25;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Square-4)"
+             d="m 450.72335,277.49984 35,35"
+             id="path7-3-7-9-4-4-2-9-3-2-1" /><path
+             style="fill:none;stroke:#6e57e0;stroke-width:25;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+             d="m 595.72335,277.49984 -35,35 35,35"
+             id="path7-3-7-9-4-4-2-9-3-2-8" /></g></g></g></g></svg>
