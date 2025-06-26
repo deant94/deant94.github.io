@@ -51,37 +51,91 @@ tabs.forEach(tab =>{
         tab.classList.add('history__active')
     })
 })
-/*==================== publications MODAL ====================*/
-const modalViews = document.querySelectorAll('.publications__modal'),
-      modalBtns = document.querySelectorAll('.publications__button'),
-      modalCloses = document.querySelectorAll('.publications__modal-close')
 
-let modal = function(modalClick){
-    modalViews[modalClick].classList.add('active-modal')
-}
+
+/*==================== publications MODAL ====================*/
+const modalViews = document.querySelectorAll('.publications__modal');
+const modalBtns = document.querySelectorAll('.publications__button');
+const modalCloses = document.querySelectorAll('.publications__modal-close');
+
+// Function to open a modal and update browser history
+let openModal = function(modalClick) {
+    // Check if any modal is currently open, if so, close it first to avoid stacking history states incorrectly
+    // This is important if a user can open one modal and then another without closing the first.
+    modalViews.forEach(modalView => {
+        if (modalView.classList.contains('active-modal')) {
+            modalView.classList.remove('active-modal');
+        }
+    });
+
+    modalViews[modalClick].classList.add('active-modal');
+
+    // Push a new state to the browser history when a modal opens
+    // This creates a history entry that, when "backed" to, can be used to close the modal.
+    history.pushState({ modalOpen: true, modalIndex: modalClick }, '', `#publication-modal-${modalClick}`);
+    // The third argument (URL) is optional, but helps create a distinct history entry
+    // and can be useful for direct linking to open modals (though more JS would be needed for that).
+};
+
+// Function to close all modals
+let closeAllModals = function() {
+    modalViews.forEach((modalView) => {
+        modalView.classList.remove('active-modal');
+    });
+};
 
 modalBtns.forEach((modalBtn, i) => {
-    modalBtn.addEventListener('click', () =>{
-        modal(i)
-    })
-})
+    modalBtn.addEventListener('click', () => {
+        openModal(i);
+    });
+});
 
 modalCloses.forEach((modalClose) => {
-    modalClose.addEventListener('click', () =>{
-        modalViews.forEach((modalView) =>{
-            modalView.classList.remove('active-modal')
-        })
-    })
-})
+    modalClose.addEventListener('click', () => {
+        // When the close button is clicked, close the modal and go back in history
+        // This makes the back button behave as expected if the modal was opened via pushState.
+        // We only go back if the current history state is one we pushed for a modal.
+        if (history.state && history.state.modalOpen) {
+            history.back(); // This will trigger the 'popstate' event
+        } else {
+            closeAllModals(); // Fallback if history state isn't as expected (e.g., direct navigation)
+        }
+    });
+});
 
-//*==================== Escape KEY FUNCTIONALITY ====================*/
+// Event listener for the Escape key (existing code, good to keep)
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' || event.key === 27) { // Check for 'Escape' key or keyCode 27
-        modalViews.forEach((modalView) => {
-            if (modalView.classList.contains('active-modal')) {
-                modalView.classList.remove('active-modal');
-            }
-        });
+    if (event.key === 'Escape' || event.keyCode === 27) {
+        // If Escape is pressed, and a modal is open, simulate a browser back to close it.
+        if (history.state && history.state.modalOpen) {
+            history.back(); // This will trigger the 'popstate' event
+        } else {
+            closeAllModals(); // Fallback
+        }
+    }
+});
+
+// Listener for browser history changes (e.g., back/forward buttons)
+window.addEventListener('popstate', (event) => {
+    // If the state that was popped *doesn't* have modalOpen: true, it means we've gone
+    // back past the modal state, so we should close the modal.
+    if (event.state === null || !event.state.modalOpen) {
+        closeAllModals();
+    } else {
+        // If the state that was popped *does* have modalOpen: true, it means we're
+        // navigating between different modal states (if you had a scenario for that)
+        // or just re-opening a specific modal. For a single modal close, this implies
+        // the state we moved *to* is the one before the modal was opened, so close.
+        // If you were implementing navigation *between* modals, this part would be different.
+        const currentModalIndex = event.state.modalIndex;
+        if (currentModalIndex !== undefined && modalViews[currentModalIndex]) {
+            // Re-open the specific modal if the state indicates it should be open
+            // (e.g., if you had multiple modals and wanted to navigate between them)
+            // For a simple "close on back", the `if (event.state === null || !event.state.modalOpen)`
+            // above is usually sufficient.
+        } else {
+             closeAllModals(); // Ensure all modals are closed if the state doesn't specify an open modal
+        }
     }
 });
 
