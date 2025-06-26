@@ -74,6 +74,17 @@ modalCloses.forEach((modalClose) => {
     })
 })
 
+//*==================== Escape KEY FUNCTIONALITY ====================*/
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' || event.key === 27) { // Check for 'Escape' key or keyCode 27
+        modalViews.forEach((modalView) => {
+            if (modalView.classList.contains('active-modal')) {
+                modalView.classList.remove('active-modal');
+            }
+        });
+    }
+});
+
 /*==================== HIGHLIGHTS SWIPER  ====================*/
 
 let swiper = new Swiper('.highlight__container', {
