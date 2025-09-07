@@ -53,6 +53,7 @@
                             <a href="#about" class="nav__link active-link">
                                 <i class="uil uil-user nav__icon"></i> About
                             </a>
+                        </li>
                         <li class="nav__item">
                             <a href="#history" class="nav__link active-link">
                                 <i class="uil uil-database nav__icon"></i> History
@@ -97,6 +98,7 @@
                         <div class="home__social">
                             <a href="mailto:dean.thomas@glasgow.ac.uk" target="_blank" class="home__social-icon">
                                 <i class="uil uil-envelope-alt"></i>
+                            </a>
 
                             <a href="https://www.linkedin.com/in/deant94/" target="_blank" class="home__social-icon">
                                 <i class="uil uil-linkedin"></i>
@@ -113,7 +115,6 @@
                             <a href="https://scholar.google.com/citations?user=eXDA9oYAAAAJ&hl=en" target="_blank" class="home__social-icon">
                                 <i class="uil uil-graduation-cap"></i>
                             </a>
-    
                         </div>
 
                         <div class="home__img">
@@ -375,7 +376,7 @@
             <!--==================== history ====================-->
             <section class="history section" id="history">
                 <h2 class="section__title">History</h2>
-                <span class="section__subtitle">As of August 2025</span>
+                <span class="section__subtitle">As of September 2025</span>
 
                 <div class="history__container container">
                     <div class="history__tabs">
@@ -594,7 +595,6 @@
                             </div>
                         </div>
                          <!-- ==================== history CONTENT 2 ==================== -->
-                          
                         <div class="history__content" data-content id="achievements">
                             <!--==================== history 10 ====================-->
                             <div class="history__data">
@@ -838,7 +838,7 @@
                                 <div>
                                     <h3 class="history__title">Invited Talk</h3>
                                     <span class="history__subtitle">Machines Making Machines </span>
-                                    <span class="history__subtitle">Foresight Intsitute</span>
+                                    <span class="history__subtitle">Foresight Institute</span>
                                     <div class="history__calendar">
                                         <i class="uil uil-calendar-alt"></i>
                                         May 2025
@@ -1515,685 +1515,778 @@
             <!--==================== PUBLICATIONS ====================-->
             <section class="publications section" id="publications">
                 <h2 class="section__title">Publications</h2>
-            </div>
-            <span class="section__subtitle">Research, Acknowledgements & Outreach <br><br> across
-                    <span class="tag tag--digital-chemistry">Digital</span> , 
+                <span class="section__subtitle"><br>across
+                    <span class="tag tag--digital-chemistry">Digital</span> ,
                     <span class="tag tag--organic-chemistry">Organic</span> &
-                    <span class="tag tag--supramolecular-chemistry">Supramolecular</span> chemistry </span>
+                    <span class="tag tag--supramolecular-chemistry">Supramolecular</span> chemistry
+                </span>
 
-                <h2 class="section__subtitle">Research</h2>
-                <div class="publications__container container grid">
-                    <!--==================== PUBLICATION 8 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP8.png" alt="" class="publications__img">
-                        <h2 class="publications__title">Programmable Microwaveable Chemistry in the Chemputer</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--digital-chemistry">Automation</span>
+                <div class="publications__container container">
+                    <div class="publications__tabs">
+                        <div class="publications__tab button--flex publications__active" data-target="#all">
+                            <i class="uil uil-focus publications__icon"></i>
+                            All
                         </div>
+                        <div class="publications__tab button--flex" data-target="#traditional">
+                            <i class="uil uil-focus-target publications__icon"></i>
+                            Traditional
+                        </div>
+                    </div>
 
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
+                    <div class="publications__sections">
+                        <!--==================== PUBLICATIONS ALL ====================-->
+                        <div class="publications__content publications__active" data-content id="all">
 
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Programmable Microwaveable Chemistry in the Chemputer</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                            <h2 class="section__subtitle">Research</h2>
+                            <div class="publications__container container grid">
+                                <!--==================== PUBLICATION 8 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP8.png" alt="" class="publications__img">
-                                    <p>This work introduces an automated chemistry platform that incorporates microwave heating, addressing previous limitations around safety, scalability, and standardization. The system uses two different microwave modules for temperature control and demonstrates its flexibility by executing a range of chemical reactions. The results highlight the platform’s reliability and versatility, expanding the capabilities of automated synthesis and paving the way for wider use in programmable chemistry</p>
+                                    <h2 class="publications__title">Programmable Microwaveable Chemistry in the Chemputer</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--digital-chemistry">Automation</span>
+                                    </div>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Programmable Microwaveable Chemistry in the Chemputer</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP8.png" alt="" class="publications__img">
+                                                <p>This work introduces an automated chemistry platform that incorporates microwave heating, addressing previous limitations around safety, scalability, and standardization. The system uses two different microwave modules for temperature control and demonstrates its flexibility by executing a range of chemical reactions. The results highlight the platform’s reliability and versatility, expanding the capabilities of automated synthesis and paving the way for wider use in programmable chemistry</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>In Submission (2025)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>In Submission (2025)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 8 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP7.png" alt="" class="publications__img">
-                        <h2 class="publications__title">Achieving Operational Universality through a Turing-Complete Chemputer</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--digital-chemistry">Abstraction</span>
-                            <span class="tag tag--digital-chemistry">Automation</span>
-                        </div>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Achieving Operational Universality through a Turing-Complete Chemputer</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                                <!--==================== PUBLICATION 8 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP7.png" alt="" class="publications__img">
-                                    <p>The Turing Machine is the fundamental abstraction behind all modern computers, and any modern computer can simulate one, an equivalence known as Turing completeness. A system with this property can, in theory, perform any algorithmically defined task through discrete unit operations. Here, we extend this concept to robotic platforms that execute physical operations for chemical synthesis via a chemically-aware programming language, XDL</p>
+                                    <h2 class="publications__title">Achieving Operational Universality through a Turing-Complete Chemputer</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--digital-chemistry">Abstraction</span>
+                                        <span class="tag tag--digital-chemistry">Automation</span>
+                                    </div>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Achieving Operational Universality through a Turing-Complete Chemputer</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP7.png" alt="" class="publications__img">
+                                                <p>The Turing Machine is the fundamental abstraction behind all modern computers, and any modern computer can simulate one, an equivalence known as Turing completeness. A system with this property can, in theory, perform any algorithmically defined task through discrete unit operations. Here, we extend this concept to robotic platforms that execute physical operations for chemical synthesis via a chemically-aware programming language, XDL</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://arxiv.org/abs/2502.02872" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>arXiv (2022)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                                <a class="button button--flex button--small highlight__button">
+                                                    <em>In Submission</em>
+                                                    <!-- <i class="uil uil-arrow-right button__icon "></i> -->
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://arxiv.org/abs/2502.02872" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>arXiv (2022)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                    <a class="button button--flex button--small highlight__button">
-                                        <em>In Submission</em>
-                                        <!-- <i class="uil uil-arrow-right button__icon "></i> -->
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 7 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP6a.png" alt="" class="publications__img">
-                        <h2 class="publications__title">A Programmable Modular Robot for the Synthesis of Molecular Machines</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--digital-chemistry">Automation</span>
-                            <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
-                            <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
-                        </div>
-                        <br>
-                        
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">A Programmable Modular Robot for the Synthesis of Molecular Machines</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                                <!--==================== PUBLICATION 7 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP6a.png" alt="" class="publications__img">
-                                    <p>The assembly of molecular nanomachines using atomically precise manipulations promises to enable molecular nanotechnology with unprecedented functional properties. However, this vision is limited by the ability to autonomously manufacture nanomachines, with current synthetic efforts being heavily labour intensive. What is needed is a system that can program the assembly of matter under digital control unifying molecular nanotechnology and macroscale chemical processes.</p>
+                                    <h2 class="publications__title">A Programmable Modular Robot for the Synthesis of Molecular Machines</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--digital-chemistry">Automation</span>
+                                        <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
+                                        <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
+                                    </div>
+                                    <br>
+                                    
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">A Programmable Modular Robot for the Synthesis of Molecular Machines</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP6a.png" alt="" class="publications__img">
+                                                <p>The assembly of molecular nanomachines using atomically precise manipulations promises to enable molecular nanotechnology with unprecedented functional properties. However, this vision is limited by the ability to autonomously manufacture nanomachines, with current synthetic efforts being heavily labour intensive. What is needed is a system that can program the assembly of matter under digital control unifying molecular nanotechnology and macroscale chemical processes.</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://www.cell.com/chem/fulltext/S2451-9294(25)00094-4" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Chem, 11, 8, 102504 (2025)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://www.cell.com/chem/fulltext/S2451-9294(25)00094-4" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Chem (2025)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 6 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP5.jpg" alt="" class="publications__img">
-                        <h2 class="publications__title">Reaction Kinetics using a Chemputable Framework for Data Collection and Analysis</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--digital-chemistry">Automation</span>
-                            <span class="tag tag--organic-chemistry">Catalysis</span>
-                        </div>
-                        <br>
-                        
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Reaction Kinetics using a Chemputable Framework for Data Collection and Analysis</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                                <!--==================== PUBLICATION 6 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP5.jpg" alt="" class="publications__img">
-                                    <p>The ChemPU platform streamlines chemistry by automating kinetic measurements, bridging synthesis and analysis. It’s versatile, adaptable, and facilitates precise data encoding of reactions via the Chemical Description Language (XDL). This innovation has the potential to enhance efficiency and create a valuable database of kinetic data for broader applications.</p>
+                                    <h2 class="publications__title">Reaction Kinetics using a Chemputable Framework for Data Collection and Analysis</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--digital-chemistry">Automation</span>
+                                        <span class="tag tag--organic-chemistry">Catalysis</span>
+                                    </div>
+                                    <br>
+                                    
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Reaction Kinetics using a Chemputable Framework for Data Collection and Analysis</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP5.jpg" alt="" class="publications__img">
+                                                <p>The ChemPU platform streamlines chemistry by automating kinetic measurements, bridging synthesis and analysis. It’s versatile, adaptable, and facilitates precise data encoding of reactions via the Chemical Description Language (XDL). This innovation has the potential to enhance efficiency and create a valuable database of kinetic data for broader applications.</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://onlinelibrary.wiley.com/doi/10.1002/anie.202315207" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Angew. Chem. Int. Ed. 63, 9 (2024)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://onlinelibrary.wiley.com/doi/10.1002/anie.202315207" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Angew. Chem. Int. Ed. 63, 9 (2024)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 5 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP4.png" alt="" class="publications__img">
-                        <h2 class="publications__title">Switched “On” Transient Fluorescence Output from a Pulsed-Fuel Molecular Ratchet</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
-                            <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
-                        </div>
-                        <br>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Switched “On” Transient Fluorescence Output from a Pulsed-Fuel Molecular Ratchet</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                                <!--==================== PUBLICATION 5 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP4.png" alt="" class="publications__img">
-                                    <p>We report the synthesis and operation of a molecular energy ratchet that transports a crown ether from solution onto a thread, along the axle, over a fluorophore, and off the other end of the thread back into bulk solution, all in response to a single pulse of a chemical fuel (CCl3CO2H). The system provides a potential alternative signaling approach for artificial molecular machines that read symbols from sequence-encoded molecular tapes.</p>
+                                    <h2 class="publications__title">Switched “On” Transient Fluorescence Output from a Pulsed-Fuel Molecular Ratchet</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
+                                        <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
+                                    </div>
+                                    <br>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Switched “On” Transient Fluorescence Output from a Pulsed-Fuel Molecular Ratchet</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP4.png" alt="" class="publications__img">
+                                                <p>We report the synthesis and operation of a molecular energy ratchet that transports a crown ether from solution onto a thread, along the axle, over a fluorophore, and off the other end of the thread back into bulk solution, all in response to a single pulse of a chemical fuel (CCl3CO2H). The system provides a potential alternative signaling approach for artificial molecular machines that read symbols from sequence-encoded molecular tapes.</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://pubs.acs.org/doi/10.1021/jacs.3c11290#" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>J. Am. Chem. Soc. 145, 49 (2023)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://pubs.acs.org/doi/10.1021/jacs.3c11290#" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>J. Am. Chem. Soc. 145, 49 (2023)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 4 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP0.jpg" alt="" class="publications__img">
-                        <h2 class="publications__title">Applications of Fuelled Artificial Molecular Machines</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--supramolecular-chemistry">Functional Materials</span>
-                            <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
-                            <span class="tag tag--organic-chemistry">Catalysis</span>
-                            <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
-                        </div>
-                        <br>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Applications of Fuelled Artificial Molecular Machines</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                                <!--==================== PUBLICATION 4 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP0.jpg" alt="" class="publications__img">
-                                    <p>Nature has evolved highly efficient biological machines that use chemical fuels to drive directional molecular motion and complex reactions with exceptional precision. Mimicking this control at the molecular level could revolutionize fields such as materials science, surface chemistry, and drug delivery. This thesis presents a series of artificial molecular machines that harness external stimuli to achieve controlled, directional motion for targeted applications.</p>
+                                    <h2 class="publications__title">Applications of Fuelled Artificial Molecular Machines</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--supramolecular-chemistry">Functional Materials</span>
+                                        <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
+                                        <span class="tag tag--organic-chemistry">Catalysis</span>
+                                        <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
+                                    </div>
+                                    <br>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Applications of Fuelled Artificial Molecular Machines</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP0.jpg" alt="" class="publications__img">
+                                                <p>Nature has evolved highly efficient biological machines that use chemical fuels to drive directional molecular motion and complex reactions with exceptional precision. Mimicking this control at the molecular level could revolutionize fields such as materials science, surface chemistry, and drug delivery. This thesis presents a series of artificial molecular machines that harness external stimuli to achieve controlled, directional motion for targeted applications.</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://research.manchester.ac.uk/en/studentTheses/applications-of-fuelled-artificial-molecular-machines" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>University of Manchester (2022)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://research.manchester.ac.uk/en/studentTheses/applications-of-fuelled-artificial-molecular-machines" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>University of Manchester (2022)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 3 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP3a.png" alt="" class="publications__img">
-                        <h2 class="publications__title">Decorating Polymer Beads with 10<sup>14</sup> Inorganic-Organic [2]Rotaxanes as shown by Spin Counting</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--supramolecular-chemistry">Functional Materials</span>
-                            <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
-                            <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
-                        </div>
-                        <br>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Decorating Polymer Beads with 10<sup>14</sup> Inorganic-Organic [2]Rotaxanes as shown by Spin Counting</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                                <!--==================== PUBLICATION 3 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP3a.png" alt="" class="publications__img">
-                                    <p>Polymer beads have been used as the core of magnetic particles for around twenty years. Here we report studies to attach polymetallic complexes to polymer beads for the first time, producing beads of around 115 microns diameter that are attached to 10<sup>14</sup> hybrid inorganic-organic [2]rotaxanes.</p>
+                                    <h2 class="publications__title">Decorating Polymer Beads with 10<sup>14</sup> Inorganic-Organic [2]Rotaxanes as shown by Spin Counting</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--supramolecular-chemistry">Functional Materials</span>
+                                        <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
+                                        <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
+                                    </div>
+                                    <br>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Decorating Polymer Beads with 10<sup>14</sup> Inorganic-Organic [2]Rotaxanes as shown by Spin Counting</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP3a.png" alt="" class="publications__img">
+                                                <p>Polymer beads have been used as the core of magnetic particles for around twenty years. Here we report studies to attach polymetallic complexes to polymer beads for the first time, producing beads of around 115 microns diameter that are attached to 10<sup>14</sup> hybrid inorganic-organic [2]rotaxanes.</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://chemrxiv.org/engage/chemrxiv/article-details/62019a0ba6fb4d98af4e3aea" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>ChemRxiv (2022)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                                <a href="https://www.nature.com/articles/s42004-022-00689-1" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Commun. Chem. 5, 73 (2022)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://chemrxiv.org/engage/chemrxiv/article-details/62019a0ba6fb4d98af4e3aea" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>ChemRxiv (2022)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                    <a href="https://www.nature.com/articles/s42004-022-00689-1" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Commun. Chem. 5, 73 (2022)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 2 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP2.png" alt="" class="publications__img">
-                        <h2 class="publications__title">Pumping Between Phases with a Pulsed-Fuel Molecular Ratchet</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--supramolecular-chemistry">Functional Materials</span>
-                            <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
-                            <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
-                        </div>
-                        <br>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Pumping Between Phases with a Pulsed-Fuel Molecular Ratchet</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                                <!--==================== PUBLICATION 2 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP2.png" alt="" class="publications__img">
-                                    <p>The sorption of species from a solution into and onto solids underpins the sequestering of waste and pollutants, precious metal recovery, heterogeneous catalysis, analysis and separation science, and other technologies. Non-equilibrium sorption by immobilized artificial molecular machines enables the transduction of energy from chemical fuels for the use, storage and release of energy and information.</p>
+                                    <h2 class="publications__title">Pumping Between Phases with a Pulsed-Fuel Molecular Ratchet</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--supramolecular-chemistry">Functional Materials</span>
+                                        <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
+                                        <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
+                                    </div>
+                                    <br>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Pumping Between Phases with a Pulsed-Fuel Molecular Ratchet</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP2.png" alt="" class="publications__img">
+                                                <p>The sorption of species from a solution into and onto solids underpins the sequestering of waste and pollutants, precious metal recovery, heterogeneous catalysis, analysis and separation science, and other technologies. Non-equilibrium sorption by immobilized artificial molecular machines enables the transduction of energy from chemical fuels for the use, storage and release of energy and information.</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://chemrxiv.org/engage/chemrxiv/article-details/6169b644f718df683fdfa4ae" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>ChemRxiv (2021)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                                <a href="https://www.nature.com/articles/s41565-022-01097-1" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Nat. Nanotechnol. 17 (2022)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://chemrxiv.org/engage/chemrxiv/article-details/6169b644f718df683fdfa4ae" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>ChemRxiv (2021)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                    <a href="https://www.nature.com/articles/s41565-022-01097-1" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Nat. Nanotechnol. 17 (2022)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 1 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP1a.png" alt="" class="publications__img">
-                        <h2 class="publications__title">Dissipative Catalysis with a Molecular Machine</h2>
+                                <!--==================== PUBLICATION 1 ====================-->
+                                <div class="publications__content">
+                                    <img src="assets/img/AP1a.png" alt="" class="publications__img">
+                                    <h2 class="publications__title">Dissipative Catalysis with a Molecular Machine</h2>
 
-                        <div class="publication__tags">
-                            <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
-                            <span class="tag tag--organic-chemistry">Catalysis</span>
-                            <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
-                        </div>
-                        <br>
+                                    <div class="publication__tags">
+                                        <span class="tag tag--supramolecular-chemistry">Molecular Machines</span>
+                                        <span class="tag tag--organic-chemistry">Catalysis</span>
+                                        <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
+                                    </div>
+                                    <br>
 
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
 
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Dissipative Catalysis with a Molecular Machine</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="assets/img/AP1.png" alt="" class="publications__img">
-                                    <p>We report on catalysis by a fuel-induced transient state of a synthetic molecular machine. Dissipative catalysis by synthetic molecular machines has implications for the future design of networks that feature communication and signaling between the components</p>
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Dissipative Catalysis with a Molecular Machine</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP1.png" alt="" class="publications__img">
+                                                <p>We report on catalysis by a fuel-induced transient state of a synthetic molecular machine. Dissipative catalysis by synthetic molecular machines has implications for the future design of networks that feature communication and signaling between the components</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/anie.201905250" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Angew. Chem. Int. Ed. 58, 29 (2019)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/anie.201905250" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Angew. Chem. Int. Ed. 58, 29 (2019)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== PUBLICATION 0 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/AP0.png" alt="" class="publications__img">
-                        <h2 class="publications__title">BCF-Catalysed Coupling of N-alkyl Arylamines & Alkenes for the Synthesis of Tetrahydroquinolines</h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--organic-chemistry">Catalysis</span>
-                        </div>
-                        <br>
-                        
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">BCF-Catalysed Coupling of N-alkyl Arylamines & Alkenes for the Synthesis of Tetrahydroquinolines</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
+                                <!--==================== PUBLICATION 0 ====================-->
+                                <div class="publications__content">
                                     <img src="assets/img/AP0.png" alt="" class="publications__img">
-                                    <p>Tetrahydroquinolines feature in molecules with wide ranging properties, including those with biological activity and materials applications. This report demonstrates that widely accessible N-alkyl arylamines can be directly coupled with new classes of alkenes to synthesise tetrahydroquinolines. The reaction is facilitated by a commercially available electron-deficient borane catalyst, and enables the creation of novel tetrahydroquinoline scaffolds.</p>
+                                    <h2 class="publications__title">BCF-Catalysed Coupling of N-alkyl Arylamines & Alkenes for the Synthesis of Tetrahydroquinolines</h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--organic-chemistry">Catalysis</span>
+                                    </div>
+                                    <br>
+                                    
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">BCF-Catalysed Coupling of N-alkyl Arylamines & Alkenes for the Synthesis of Tetrahydroquinolines</h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                                <img src="assets/img/AP0.png" alt="" class="publications__img">
+                                                <p>Tetrahydroquinolines feature in molecules with wide ranging properties, including those with biological activity and materials applications. This report demonstrates that widely accessible N-alkyl arylamines can be directly coupled with new classes of alkenes to synthesise tetrahydroquinolines. The reaction is facilitated by a commercially available electron-deficient borane catalyst, and enables the creation of novel tetrahydroquinoline scaffolds.</p>
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://pubs.acs.org/doi/10.1021/acs.orglett.5c03023" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Org. Lett. (2025)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Org. Lett. (2025)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <h2 class="section__subtitle">Acknowledgements</h2>
-                <div class="publications__container container grid">
-                    <!--==================== ACKNOWLEDGEMENT 5 ====================-->
-                    <div class="publications__content">
-                        <img src="" alt="" class="publications__img">
-                        <h2 class="publications__title">Universal Peptide Synthesis via Solid-Phase Methods fused with Chemputation
-                        </h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--digital-chemistry">Abstraction</span>
-                            <span class="tag tag--digital-chemistry">Automation</span>
-                        </div>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Universal Peptide Synthesis via Solid-Phase Methods fused with Chemputation
-                                </h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="" alt="" class="publications__img">
-                                    <p></p>
-                                </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://www.nature.com/articles/s41467-025-62344-2" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Nat. Comm., 16, 7322 (2025)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== ACKNOWLEDGEMENT 5 ====================-->
-                    <div class="publications__content">
-                        <img src="" alt="" class="publications__img">
-                        <h2 class="publications__title">Natural-Language-Interfaced Robotic Synthesis for AI-Copilot-Assisted Exploration of Inorganic Materials 
-                        </h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--digital-chemistry">Abstraction</span>
-                            <span class="tag tag--digital-chemistry">Automation</span>
-                        </div>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Natural-Language-Interfaced Robotic Synthesis for AI-Copilot-Assisted Exploration of Inorganic Materials
-                                </h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="" alt="" class="publications__img">
-                                    <p></p>
-                                </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://pubs.acs.org/doi/full/10.1021/jacs.5c05916" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>J. Am. Chem. Soc., 147, 26, 23014-23025 (2025)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== ACKNOWLEDGEMENT 4 ====================-->
-                    <div class="publications__content">
-                        <img src="" alt="" class="publications__img">
-                        <h2 class="publications__title">Validation of the Scientific Literature via Chemputation Augmented by Large Language Models 
-                        </h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--digital-chemistry">Abstraction</span>
-                            <span class="tag tag--digital-chemistry">Automation</span>
-                        </div>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Validation of the Scientific Literature via Chemputation Augmented by Large Language Models
-                                </h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="" alt="" class="publications__img">
-                                    <p></p>
-                                </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://arxiv.org/abs/2410.06384" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>arXiv (2024)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== ACKNOWLEDGEMENT 3 ====================-->
-                    <div class="publications__content">
-                        <img src="" alt="" class="publications__img">
-                        <h2 class="publications__title">Universal Chemical Programming Language for Robotic Synthesis Repeatability
-                        </h2>
-                        
-                        <div class="publication__tags">
-                            <span class="tag tag--digital-chemistry">Reproducibility</span>
-                            <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
-                        </div>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Universal Chemical Programming Language for Robotic Synthesis Repeatability
-                                </h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="" alt="" class="publications__img">
-                                    <p></p>
-                                </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://www.nature.com/articles/s44160-023-00473-6" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Nat. Synth, 3, 488-496 (2024)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== ACKNOWLEDGEMENT 2 ====================-->
-                    <div class="publications__content">
-                        <img src="" alt="" class="publications__img">
-                        <h2 class="publications__title">Transient Self-Assembly of Metal–Organic Complexes
-                        </h2>
-
-                        <div class="publication__tags">
-                            <span class="tag tag--supramolecular-chemistry">Complex Systems</span>
-                            <span class="tag tag--organic-chemistry">Catalysis</span>
-                        </div>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Transient Self-Assembly of Metal–Organic Complexes
-                                </h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="" alt="" class="publications__img">
-                                    <p></p>
-                                </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://doi.org/10.1039/D2SC06374C" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Chem. Sci., 14, 1244-1251 (2023)</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== ACKNOWLEDGEMENT 1 ====================-->
-                    <div class="publications__content">
-                        
-                    <img src="" alt="" class="publications__img">
-                    <h2 class="publications__title">Practical and Selective sp3 C−H Bond Chlorination via Aminium Radicals
-                    </h2>
-
-                    <div class="publication__tags">
-                        <span class="tag tag--organic-chemistry">Methodology</span>
-                    </div>
-
-                    <span class="button button--flex button--small button--link publications__button">
-                        View More
-                        <i class="uil uil-arrow-right button__icon"></i>
-                    </span>
-
-                    <div class="publications__modal">
-                        <div class="publications__modal-content">                                
-                            <h2 class="publications__modal-title">Practical and Selective sp3 C−H Bond Chlorination via Aminium Radicals
-                            </h2>
-                            <i class="uil uil-times-circle publications__modal-close"></i>
-                            <div class="about__container container grid">
-                                <img src="" alt="" class="publications__img">
-                                <p></p>
-                            </div>
-                            <ul class="publications__modal-publications grid">
-                                <a href="https://doi.org/10.1002/anie.202100030" target='_blank' class="button button--flex button--small highlight__button">
-                                    <em>Angew. Chem. Int. Ed., 60, 13 (2021)</em>
-                                    <i class="uil uil-arrow-right button__icon "></i>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <h2 class="section__subtitle">Outreach</h2>
-                <div class="publications__container container grid">
-                    <!--==================== OUTREACH 4 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/OP4a.webp" alt="" class="publications__img">
-                        <h2 class="publications__title">Can Prof. R. Obot Be Beautiful Too?</h2>
                         <br>
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
+                        <br>
+                        <br>
+                        <br>
+                        <h2 class="section__subtitle">Acknowledgements</h2>
+                        <div class="publications__container container grid">
+                                <!--==================== ACKNOWLEDGEMENT 5 ====================-->
+                                <div class="publications__content">
+                                    <h2 class="publications__title">Universal Peptide Synthesis via Solid-Phase Methods fused with Chemputation
+                                    </h2>
 
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Can Prof. R. Obot Be Beautiful Too?</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="assets/img/OP4a.webp" alt="" class="publications__img">
-                                    <p>The article explores how AI is transforming scientific research, raising the question of whether machine-generated discoveries can be described as "beautiful" in the same way as human work. As AI becomes increasingly central to fields like chemistry, with advancements in retrosynthesis, reaction planning, and Nobel Prize-winning applications, it blurs the line between human and machine creativity. The evolution of AI systems challenges us to rethink the appreciation in science as more discoveries are driven by autonomous processes.</p>
+                                    <div class="publication__tags">
+                                        <span class="tag tag--digital-chemistry">Abstraction</span>
+                                        <span class="tag tag--digital-chemistry">Automation</span>
+                                    </div>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Universal Peptide Synthesis via Solid-Phase Methods fused with Chemputation
+                                            </h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://www.nature.com/articles/s41467-025-62344-2" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Nat. Comm., 16, 7322 (2025)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://www.chemistryworld.com/opinion/can-the-work-of-professor-r-obot-be-beautiful-too/4020337.article" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Chemistry World</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
+                                <!--==================== ACKNOWLEDGEMENT 5 ====================-->
+                                <div class="publications__content">
+                                    <h2 class="publications__title">Natural-Language-Interfaced Robotic Synthesis for AI-Copilot-Assisted Exploration of Inorganic Materials 
+                                    </h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--digital-chemistry">Abstraction</span>
+                                        <span class="tag tag--digital-chemistry">Automation</span>
+                                    </div>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Natural-Language-Interfaced Robotic Synthesis for AI-Copilot-Assisted Exploration of Inorganic Materials
+                                            </h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://pubs.acs.org/doi/full/10.1021/jacs.5c05916" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>J. Am. Chem. Soc., 147, 26, 23014-23025 (2025)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--==================== ACKNOWLEDGEMENT 4 ====================-->
+                                <div class="publications__content">
+                                    <h2 class="publications__title">Validation of the Scientific Literature via Chemputation Augmented by Large Language Models 
+                                    </h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--digital-chemistry">Abstraction</span>
+                                        <span class="tag tag--digital-chemistry">Automation</span>
+                                    </div>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Validation of the Scientific Literature via Chemputation Augmented by Large Language Models
+                                            </h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://arxiv.org/abs/2410.06384" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>arXiv (2024)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--==================== ACKNOWLEDGEMENT 3 ====================-->
+                                <div class="publications__content">
+                                    <h2 class="publications__title">Universal Chemical Programming Language for Robotic Synthesis Repeatability
+                                    </h2>
+                                    
+                                    <div class="publication__tags">
+                                        <span class="tag tag--digital-chemistry">Reproducibility</span>
+                                        <span class="tag tag--organic-chemistry">Multi-step Synthesis</span>
+                                    </div>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Universal Chemical Programming Language for Robotic Synthesis Repeatability
+                                            </h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://www.nature.com/articles/s44160-023-00473-6" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Nat. Synth, 3, 488-496 (2024)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--==================== ACKNOWLEDGEMENT 2 ====================-->
+                                <div class="publications__content">
+                                    <h2 class="publications__title">Transient Self-Assembly of Metal–Organic Complexes
+                                    </h2>
+
+                                    <div class="publication__tags">
+                                        <span class="tag tag--supramolecular-chemistry">Complex Systems</span>
+                                        <span class="tag tag--organic-chemistry">Catalysis</span>
+                                    </div>
+
+                                    <span class="button button--flex button--small button--link publications__button">
+                                        View More
+                                        <i class="uil uil-arrow-right button__icon"></i>
+                                    </span>
+
+                                    <div class="publications__modal">
+                                        <div class="publications__modal-content">                                
+                                            <h2 class="publications__modal-title">Transient Self-Assembly of Metal–Organic Complexes
+                                            </h2>
+                                            <i class="uil uil-times-circle publications__modal-close"></i>
+                                            <div class="about__container container grid">
+                                            </div>
+                                            <ul class="publications__modal-publications grid">
+                                                <a href="https://doi.org/10.1039/D2SC06374C" target='_blank' class="button button--flex button--small highlight__button">
+                                                    <em>Chem. Sci., 14, 1244-1251 (2023)</em>
+                                                    <i class="uil uil-arrow-right button__icon "></i>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--==================== ACKNOWLEDGEMENT 1 ====================-->
+                                <div class="publications__content">
+                                <h2 class="publications__title">Practical and Selective sp3 C−H Bond Chlorination via Aminium Radicals
+                                </h2>
+                            <div class="publication__tags">
+                                <span class="tag tag--organic-chemistry">Methodology</span>
+                            </div>
+
+                            <span class="button button--flex button--small button--link publications__button">
+                                View More
+                                <i class="uil uil-arrow-right button__icon"></i>
+                            </span>
+
+                            <div class="publications__modal">
+                                <div class="publications__modal-content">                                
+                                    <h2 class="publications__modal-title">Practical and Selective sp3 C−H Bond Chlorination via Aminium Radicals
+                                    </h2>
+                                    <i class="uil uil-times-circle publications__modal-close"></i>
+                                    <div class="about__container container grid">
+                                    </div>
+                                    <ul class="publications__modal-publications grid">
+                                        <a href="https://doi.org/10.1002/anie.202100030" target='_blank' class="button button--flex button--small highlight__button">
+                                            <em>Angew. Chem. Int. Ed., 60, 13 (2021)</em>
+                                            <i class="uil uil-arrow-right button__icon "></i>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <h2 class="section__subtitle">Outreach</h2>
+                        <div class="publications__container container grid">
+                            <!--==================== OUTREACH 4 ====================-->
+                            <div class="publications__content">
+                                <img src="assets/img/OP4a.webp" alt="" class="publications__img">
+                                <h2 class="publications__title">Can Prof. R. Obot Be Beautiful Too?</h2>
+                                <br>
+                                <span class="button button--flex button--small button--link publications__button">
+                                    View More
+                                    <i class="uil uil-arrow-right button__icon"></i>
+                                </span>
+
+                                <div class="publications__modal">
+                                    <div class="publications__modal-content">                                
+                                        <h2 class="publications__modal-title">Can Prof. R. Obot Be Beautiful Too?</h2>
+                                        <i class="uil uil-times-circle publications__modal-close"></i>
+                                        <div class="about__container container grid">
+                                            <img src="assets/img/OP4a.webp" alt="" class="publications__img">
+                                            <p>The article explores how AI is transforming scientific research, raising the question of whether machine-generated discoveries can be described as "beautiful" in the same way as human work. As AI becomes increasingly central to fields like chemistry, with advancements in retrosynthesis, reaction planning, and Nobel Prize-winning applications, it blurs the line between human and machine creativity. The evolution of AI systems challenges us to rethink the appreciation in science as more discoveries are driven by autonomous processes.</p>
+                                        </div>
+                                        <ul class="publications__modal-publications grid">
+                                            <a href="https://www.chemistryworld.com/opinion/can-the-work-of-professor-r-obot-be-beautiful-too/4020337.article" target='_blank' class="button button--flex button--small highlight__button">
+                                                <em>Chemistry World</em>
+                                                <i class="uil uil-arrow-right button__icon "></i>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--==================== OUTREACH 3 ====================-->
+                            <div class="publications__content">
+                                <img src="assets/img/OP3.png" alt="" class="publications__img">
+                                <h2 class="publications__title">Academic Amnesia</h2>
+
+                                <span class="button button--flex button--small button--link publications__button">
+                                    View More
+                                    <i class="uil uil-arrow-right button__icon"></i>
+                                </span>
+
+                                <div class="publications__modal">
+                                    <div class="publications__modal-content">                                
+                                        <h2 class="publications__modal-title">Academic Amnesia</h2>
+                                        <i class="uil uil-times-circle publications__modal-close"></i>
+                                        <div class="about__container container grid">
+                                            <img src="assets/img/OP3.png" alt="" class="publications__img">
+                                            <p>The article explores the pitfalls of the "teach, test, forget" cycle in STEM education, where short-term memorization often outweighs long-term understanding. It calls for a shift towards more interactive, experiential learning and smaller class sizes to promote critical thinking and knowledge retention</p>
+                                        </div>
+                                        <ul class="publications__modal-publications grid">
+                                            <a href="https://www.chemistryworld.com/opinion/breaking-the-cycle-of-teach-test-forget/4019085.article" target='_blank' class="button button--flex button--small highlight__button">
+                                                <em>Chemistry World</em>
+                                                <i class="uil uil-arrow-right button__icon "></i>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--==================== OUTREACH 2 ====================-->
+                            <div class="publications__content">
+                                <img src="assets/img/OP2.png" alt="" class="publications__img">
+                                <h2 class="publications__title">Pump it Up!</h2>
+
+                                <span class="button button--flex button--small button--link publications__button">
+                                    View More
+                                    <i class="uil uil-arrow-right button__icon"></i>
+                                </span>
+
+                                <div class="publications__modal">
+                                    <div class="publications__modal-content">                                
+                                        <h2 class="publications__modal-title">Pump it Up!</h2>
+                                        <i class="uil uil-times-circle publications__modal-close"></i>
+                                        <div class="about__container container grid">
+                                            <img src="assets/img/OP2.png" alt="" class="publications__img">
+                                            <p>The article shares the story behind the 2022 paper on artificial molecular pumps, exploring the development process and challenges faced. These pumps mimic biological motors, using chemical fuel to drive cargo between phases, offering potential applications in environmental and material sciences. The article highlights the design evolution and the significance of these molecular machines in future technologies.</p>
+                                        </div>
+                                        <ul class="publications__modal-publications grid">
+                                            <a href="https://communities.springernature.com/posts/pump-it-up" target='_blank' class="button button--flex button--small highlight__button">
+                                                <em>Nature Research Communities</em>
+                                                <i class="uil uil-arrow-right button__icon "></i>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--==================== OUTREACH 1 ====================-->
+                            <div class="publications__content">
+                                <img src="assets/img/OP1.jpg" alt="" class="publications__img">
+                                <h2 class="publications__title">Let it go</h2>
+
+                                <span class="button button--flex button--small button--link publications__button">
+                                    View More
+                                    <i class="uil uil-arrow-right button__icon"></i>
+                                </span>
+
+                                <div class="publications__modal">
+                                    <div class="publications__modal-content">                                
+                                        <h2 class="publications__modal-title">Let it go</h2>
+                                        <i class="uil uil-times-circle publications__modal-close"></i>
+                                        <div class="about__container container grid">
+                                            <img src="assets/img/OP1.jpg" alt="" class="publications__img">
+                                            <p>The article reflects on the challenges faced by researchers during the COVID-19 lockdowns, where limited lab time disrupted crucial work. It stresses the importance of accepting that lost time cannot be fully recovered and cautions against overworking in an attempt to make up for it. Instead, advocating for a healthier work-life balance, encouraging researchers to reset expectations and focus on sustainable progress.</p>
+                                        </div>
+                                        <ul class="publications__modal-publications grid">
+                                            <a href="https://www.chemistryworld.com/opinion/let-it-go/4013718.article" target='_blank' class="button button--flex button--small highlight__button">
+                                                <em>Chemistry World</em>
+                                                <i class="uil uil-arrow-right button__icon "></i>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                
+
+                        <!--==================== PUBLICATIONS Traditional ====================-->
+                        <div class="publications__content" data-content id="traditional">
+                            <h2 class="section__subtitle">Research</h2>
+                            <!--==================== PUBLICATION 9 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="TBC" target="_blank">
+                                        9. Programmable Microwaveable Chemistry in the Chemputer
+                                    </a>    
+                                </h2>
+                                <h2 class="section__subtitle">
+                                    Jacopo Zero, Ekaterina Trushina, Niclas Grocholski, Nikita Smirnov, <u>Dean Thomas</u> & Leroy Cronin*, <i>In Submission</i></h2>
+                            </div>
+                            <!--==================== PUBLICATION 8 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="https://arxiv.org/abs/2502.02872" target="_blank">
+                                        8. Achieving Operational Universality through a Turing-Complete Chemputer
                                     </a>
-                                </ul>
+                                </h2>
+                                <h2 class="section__subtitle">
+                                        Daniel Gahler, <u>Dean Thomas</u>, Slawomir Lach & Leroy Cronin*, <i>In Submission</i></h2>
+                            </div>
+                            <!--==================== PUBLICATION 7 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="https://pubs.acs.org/doi/10.1021/acs.orglett.5c03023" target="_blank">
+                                        7. BCF-Catalysed Coupling of N-alkyl Arylamines & Alkenes for the Synthesis of Tetrahydroquinolines</h2>
+                                <h2 class="section__subtitle">
+                                    Sophia Moreen Gloria, Laura Winfrey, Yuncong Gao, Maryia Barysevich, Joseph P. Gillions, Lei Yun, Halima Patel, Amy Shah, Ana Alvarez-Montoya, <u>Dean Thomas</u>, Ahmad Khan, Hassan Y. Harb, Alison M. Stuart, Alexander P. Pulis*, <i>Org. Lett.</i> (2025)</h2>
+                            </div>
+                            <!--==================== PUBLICATION 6 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="https://www.cell.com/chem/fulltext/S2451-9294(25)00094-4" target="_blank">
+                                        6. A Programmable Modular Robot for the Synthesis of Molecular Machines
+                                    </a>
+                                </h2>
+                                <h2 class="section__subtitle">
+                                    Jacopo Zero, Ekaterina Trushina, Niclas Grocholski, Nikita Smirnov, <u>Dean Thomas</u> & Leroy Cronin*, <i>Chem</i> 11, 8, 102504 (2025)</h2>
+                            </div>
+                            <!--==================== PUBLICATION 5 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="https://onlinelibrary.wiley.com/doi/10.1002/anie.202315207" target="_blank">
+                                        5. Reaction Kinetics using a Chemputable Framework for Data Collection and Analysis
+                                    </a>
+                                </h2>
+                                <h2 class="section__subtitle">
+                                    Bartosz M. Matysiak <u>Dean Thomas</u> & Leroy Cronin*, <i>Angew. Chem. Int. Ed.</i>, 63, 9, e202315207 (2024)</h2>
+                            </div>
+                            <!--==================== PUBLICATION 4 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="https://pubs.acs.org/doi/10.1021/jacs.3c11290#" target="_blank">
+                                        4. Switched “On” Transient Fluorescence Output from a Pulsed-Fuel Molecular Ratchet
+                                    </a>
+                                </h2>
+                                <h2 class="section__subtitle">
+                                    Andrei S. Baluna, Marcel Dommaschk, Burkhard Groh, Salma Kassem, David A. Leigh*, Daniel J. Tetlow, <u>Dean Thomas</u> & Loli Varela López, <i>J. Am. Chem. Soc.</i>, 145, 49, pp. 27113-27119 (2023)</h2>
+                            </div>
+                            <!--==================== PUBLICATION 3 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="https://www.nature.com/articles/s42004-022-00689-1" target="_blank">
+                                        3. Decorating Polymer Beads with 10<sup>14</sup> Inorganic-Organic [2]Rotaxanes as shown by Spin Counting
+                                    </a>
+                                </h2>
+                                <h2 class="section__subtitle">
+                                    Deepak Asthana, <u>Dean Thomas</u>, Selena J. Lockyer, Adam Brookfield, Grigore A. Timco, Iñigo J. Vitorica-Yrezabal, George F. S. Whitehead, Eric J. L. McInnes, David Collison, David A. Leigh & Richard E. P. Winpenny*, <i>Commun. Chem.</i>, 5, 73, pp. 1-9 (2022)</h2>
+                            </div>
+                            <!--==================== PUBLICATION 2 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="https://www.nature.com/articles/s41565-022-01097-1" target="_blank">
+                                        2. Pumping Between Phases with a Pulsed-Fuel Molecular Ratchet
+                                    </a>
+                                </h2>
+                                <h2 class="section__subtitle">
+                                    <u>Dean Thomas</u>, Daniel J. Tetlow, Yansong Ren, Salma Kassem, Ulvi Karaca & David A. Leigh*, <u>Nat. Nanotechnol.</u> 17, pp. 701-707 (2022)</h2>
+                            </div>
+                            <!--==================== PUBLICATION 1 ====================-->
+                            <div class="publications__content">
+                                <h2 class="publications__title">
+                                    <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/anie.201905250" target="_blank">
+                                        1. Dissipative Catalysis with a Molecular Machine
+                                    </a>
+                                </h2>
+                                <h2 class="section__subtitle">
+                                    Chiara Biagini, Stephen D. P. Fielden, Prof. David A. Leigh*, Dr. Fredrik Schaufelberger, Prof. Stefano Di Stefano & <u>Dean Thomas</u>, <i>Angew. Chem. Int. Ed.</i>, 58, 29, pp. 9876-9880 (2019)</h2>
                             </div>
                         </div>
                     </div>
-                    <!--==================== OUTREACH 3 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/OP3.png" alt="" class="publications__img">
-                        <h2 class="publications__title">Academic Amnesia</h2>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Academic Amnesia</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="assets/img/OP3.png" alt="" class="publications__img">
-                                    <p>The article explores the pitfalls of the "teach, test, forget" cycle in STEM education, where short-term memorization often outweighs long-term understanding. It calls for a shift towards more interactive, experiential learning and smaller class sizes to promote critical thinking and knowledge retention</p>
-                                </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://www.chemistryworld.com/opinion/breaking-the-cycle-of-teach-test-forget/4019085.article" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Chemistry World</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== OUTREACH 2 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/OP2.png" alt="" class="publications__img">
-                        <h2 class="publications__title">Pump it Up!</h2>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Pump it Up!</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="assets/img/OP2.png" alt="" class="publications__img">
-                                    <p>The article shares the story behind the 2022 paper on artificial molecular pumps, exploring the development process and challenges faced. These pumps mimic biological motors, using chemical fuel to drive cargo between phases, offering potential applications in environmental and material sciences. The article highlights the design evolution and the significance of these molecular machines in future technologies.</p>
-                                </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://communities.springernature.com/posts/pump-it-up" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Nature Research Communities</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--==================== OUTREACH 1 ====================-->
-                    <div class="publications__content">
-                        <img src="assets/img/OP1.jpg" alt="" class="publications__img">
-                        <h2 class="publications__title">Let it go</h2>
-
-                        <span class="button button--flex button--small button--link publications__button">
-                            View More
-                            <i class="uil uil-arrow-right button__icon"></i>
-                        </span>
-
-                        <div class="publications__modal">
-                            <div class="publications__modal-content">                                
-                                <h2 class="publications__modal-title">Let it go</h2>
-                                <i class="uil uil-times-circle publications__modal-close"></i>
-                                <div class="about__container container grid">
-                                    <img src="assets/img/OP1.jpg" alt="" class="publications__img">
-                                    <p>The article reflects on the challenges faced by researchers during the COVID-19 lockdowns, where limited lab time disrupted crucial work. It stresses the importance of accepting that lost time cannot be fully recovered and cautions against overworking in an attempt to make up for it. Instead, advocating for a healthier work-life balance, encouraging researchers to reset expectations and focus on sustainable progress.</p>
-                                </div>
-                                <ul class="publications__modal-publications grid">
-                                    <a href="https://www.chemistryworld.com/opinion/let-it-go/4013718.article" target='_blank' class="button button--flex button--small highlight__button">
-                                        <em>Chemistry World</em>
-                                        <i class="uil uil-arrow-right button__icon "></i>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>                    
             </section>
 
             <!--==================== Media ====================-->
@@ -2429,66 +2522,32 @@
                 <div class="contact__container container grid" >
                     <div class="contact__information">
                         <i class="uil uil-envelope-alt contact__icon"></i>
-                    
                         <div>
                             <h3 class="contact__title">Email </h3>
-                            <a class="'contact__title" href="mailto:dean.thomas@glasgow.ac.uk">dean.thomas@glasgow.ac.uk</a>
+                            <a class="contact__title" href="mailto:dean.thomas@glasgow.ac.uk">dean.thomas@glasgow.ac.uk</a>
                         </div>
                     </div>
-                        <!-- <div>
-                            <a href="mailto:dean.thomas@glasgow.ac.uk" class="button button--flex">
-                                Send Message
-                                <i class="uil uil-message button__icon"></i>
-                            </a>
-                        </div> -->
                     <div class="contact__information">
                         <i class="uil uil-linkedin contact__icon"></i>
                         <div>
                             <h3 class="contact__title">LinkedIn</h3>
-                            <a class="'contact__title" href="https://www.linkedin.com/in/deant94/">deant94</a>
+                            <a class="contact__title" href="https://www.linkedin.com/in/deant94/">deant94</a>
                         </div>
                     </div>
                     <div class="contact__information">
                         <i class="uil uil-twitter-alt contact__icon"></i>
                         <div>
                             <h3 class="contact__title">Twitter</h3>
-                            <a class="'contact__title" href="https://x.com/deant94">@deant94</a>
+                            <a class="contact__title" href="https://x.com/deant94">@deant94</a>
                         </div>
                     </div>
                     <div class="contact__information">
                         <i class="uil uil-twitter contact__icon"></i>
                         <div>
                             <h3 class="contact__title">BlueSky</h3>
-                            <a class="'contact__title" href="https://bsky.app/profile/deant94.bsky.social">@deant94.bsky.social</a>
+                            <a class="contact__title" href="https://bsky.app/profile/deant94.bsky.social">@deant94.bsky.social</a>
                         </div>
                     </div>
-
-                    <!-- <form action="mailto:dean.thomas@glasgow.ac.uk" class="contact__form grid">
-                        <div class="contact__inputs grid">
-                            <div class="contact__content">
-                                <label for="" class="contact__label">Name</label>
-                                <input type="text" class="contact__input">
-                            </div>
-                            <div class="contact__content">
-                                <label for="" class="contact__label">Email</label>
-                                <input type="email" class="contact__input">
-                            </div>
-                            <div class="contact__content">
-                                <label for="" class="contact__label">Subject</label>
-                                <input type="text" class="contact__input">
-                            </div>
-                            <div class="contact__content">
-                                <label for="" class="contact__label">Message</label>
-                                <textarea name="" id="" cols="0" rows="7" class="contact__input"></textarea>
-                            </div>
-                        </div>
-                        <div>
-                            <a href="mailto:dean.thomas@glasgow.ac.uk" class="button button--flex">
-                                Send Message
-                                <i class="uil uil-message button__icon"></i>
-                            </a>
-                        </div>
-                    </form> -->
                 </div>
             </section>
         </main>
@@ -2527,11 +2586,12 @@
 
                         <a href="mailto:dean.thomas@glasgow.ac.uk" target="_blank" class="footer__social">
                             <i class="uil uil-envelope-alt"></i>
+                        </a>
 
                         <a href="https://www.linkedin.com/in/deant94/" target="_blank" class="footer__social">
                             <i class="uil uil-linkedin"></i>
                         </a>
-
+                        
                         <a href="https://x.com/deant94" target="_blank" class="footer__social">
                             <i class="uil uil-twitter-alt"></i>
                         </a>
