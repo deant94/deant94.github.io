@@ -713,7 +713,7 @@ img {
   color: var(--first-color);
 }
 
-.publications__tab {
+.publications__tabs {
   display: flex;
   flex-direction: row;
   align-items: center; /* vertical centering */
@@ -1183,11 +1183,9 @@ body.dark-theme .tag--organic-chemistry {
     margin-left: auto;
     margin-right: auto;
   }
-
   body{
     margin: 0;
   }
-
   .section{
     padding: 6rem 0 2rem;
   }
@@ -1218,17 +1216,14 @@ body.dark-theme .tag--organic-chemistry {
     display: flex;
     column-gap: 2rem;
   }
-  
   .nav__menu{
     margin-left: auto;
   }
-  
   .change-theme {
     margin: 0;
     display: inline-flex;
     align-items: center;
   }
-  
   .home__container{
     row-gap: 5rem;
   }
@@ -1265,7 +1260,7 @@ body.dark-theme .tag--organic-chemistry {
     margin: 0 var(--mb-1);
   }
   .history__sections{
-    grid-template-colusmns: .5fr;
+    grid-template-columns: .5fr;
   }
   .history__tabs {
     justify-content: center;
@@ -1274,8 +1269,8 @@ body.dark-theme .tag--organic-chemistry {
     gap: 1rem; /* Adjust spacing for larger screens */
   }
   /* .publications__img{
-    width: 320px; */
-  }
+    width: 320px;
+  } */
   .publications__content{
     align-items: center;
   }
@@ -1299,6 +1294,7 @@ body.dark-theme .tag--organic-chemistry {
     width: 550px;
   }
 }
+
 /* For large devices */
 @media screen and (min-width: 1024px){
   .header,
