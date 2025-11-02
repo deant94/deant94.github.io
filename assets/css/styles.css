@@ -262,7 +262,6 @@ img {
   bottom: 0;
 }
 
-
 /* Active link */
 .active-link{
   color: var(--first-color);
@@ -702,7 +701,7 @@ img {
 }
 
 /*==================== publications ====================*/
-.publications__tabs{
+.publications__tabs {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: var(--mb-2-5);
@@ -715,20 +714,23 @@ img {
 }
 
 .publications__tab {
-  display: block;
-  flex-direction: column;
-  align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* vertical centering */
   justify-content: center;
+  gap: 0.5rem;
   text-align: center;
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
   cursor: pointer;
-  padding: 0.1rem 1rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   background-color: var(--container-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, transform 0.3s;
+  line-height: 1; /* keeps text height tight for better alignment */
 }
+
 .publications [data-content]{
   display: none;
 }
@@ -783,11 +785,11 @@ img {
   box-shadow: 0 8px 16px rgba(0,0,0,.15);
 }
 
-.publications__icon{
-  display: block;
-  font-size: 1.5rem;
-  color: var(--first-color);
-  margin-bottom: var(--mb-1);
+.publications__icon {
+  font-size: 1.5em; /* optional – tweak for visual balance */
+  vertical-align: middle; /* ensures even alignment with text */
+  display: flex;
+  align-items: center; /* ensures icon centers properly */
 }
 
 .publications__title{
@@ -1190,7 +1192,7 @@ body.dark-theme .tag--organic-chemistry {
     padding: 6rem 0 2rem;
   }
   .section__subtitle{
-    margin-bottom: 4rem;
+    margin-bottom: 1.5rem;
   }
   .header{
     top: 0;
@@ -1216,6 +1218,7 @@ body.dark-theme .tag--organic-chemistry {
     display: flex;
     column-gap: 2rem;
   }
+  
   .nav__menu{
     margin-left: auto;
   }
@@ -1262,7 +1265,7 @@ body.dark-theme .tag--organic-chemistry {
     margin: 0 var(--mb-1);
   }
   .history__sections{
-    grid-template-columns: .5fr;
+    grid-template-colusmns: .5fr;
   }
   .history__tabs {
     justify-content: center;
@@ -1270,8 +1273,8 @@ body.dark-theme .tag--organic-chemistry {
     grid-template-rows: repeat(2, auto); /* Two rows */
     gap: 1rem; /* Adjust spacing for larger screens */
   }
-  .publication__img{
-    width: 320px;
+  /* .publications__img{
+    width: 320px; */
   }
   .publications__content{
     align-items: center;
