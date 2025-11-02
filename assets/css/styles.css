@@ -701,7 +701,7 @@ img {
 }
 
 /*==================== publications ====================*/
-.publications__tabs {
+.publications_tab {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: var(--mb-2-5);
