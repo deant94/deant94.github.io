@@ -714,21 +714,19 @@ img {
 }
 
 .publications__tabs {
-  display: flex;
+  display:flex;
   flex-direction: row;
-  align-items: center; /* vertical centering */
   justify-content: center;
-  gap: 0.5rem;
+  gap: 2.5rem;
   text-align: center;
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
   cursor: pointer;
   padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: var(--container-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.3s;
-  line-height: 1; /* keeps text height tight for better alignment */
+  border-radius: 1rem;
+  width: fit-content; 
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .publications [data-content]{
