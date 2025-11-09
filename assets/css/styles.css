@@ -601,14 +601,6 @@ img {
   justify-content: space-evenly;
   margin-bottom: var(--mb-2-5);
 }
-
-/* .history__tabs {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem; Optional, for spacing between items
-  margin-bottom: var(--mb-1);
-} */
-
 .history__button {
   display: block;
   flex-direction: column;
@@ -624,6 +616,11 @@ img {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, transform 0.3s;
 }
+.history__button:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,.15);
+  transform: translateY(-2px);
+  color: var(--first-color);
+}
 
 .history__content {
   display: flex;
@@ -638,12 +635,6 @@ img {
   margin: 0 auto;         /* Center it within the parent */
   padding: 1rem;          /* Add padding for spacing */
   box-sizing: border-box; /* Include padding in the width calculation */
-}
-
-.history__button:hover {
-  box-shadow: 0 8px 16px rgba(0,0,0,.15);
-  transform: translateY(-2px);
-  color: var(--first-color);
 }
 
 .history__icon {
@@ -701,34 +692,31 @@ img {
 }
 
 /*==================== publications ====================*/
-.publications_tab {
+.publications__tabs{
   display: flex;
   justify-content: space-evenly;
   margin-bottom: var(--mb-2-5);
 }
-
-.publications__tab:hover {
-  box-shadow: 0 8px 16px rgba(0,0,0,.15);
-  transform: translateY(-2px);
-  color: var(--first-color);
-}
-
-.publications__tabs {
+.publications__subset{
   display:flex;
   flex-direction: row;
   justify-content: center;
-  gap: 2.5rem;
+  gap: 1rem;
   text-align: center;
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
   cursor: pointer;
-  padding: 1rem;
-  border-radius: 1rem;
-  width: fit-content; 
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0.1rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--container-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
 }
-
+.publications__subset:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,.15);
+  transform: translateY(-2px);
+  color: var(--first-color);
+} 
 .publications [data-content]{
   display: none;
 }
@@ -769,6 +757,9 @@ img {
   border-radius: .5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,.15);
   transition: .3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .publications__img {
@@ -799,6 +790,7 @@ img {
 .publications__button{
   cursor: pointer;
   font-size: var(--small-font-size);
+  margin-top: auto
 }
 
 .publications__button:hover .button__icon{
@@ -1137,6 +1129,12 @@ body.dark-theme .tag--organic-chemistry {
     width: 100%;
     height: auto;
   }
+  .publications__tabs {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto);
+    gap: 1rem;
+  }
 }
 
 /* For medium devices */
@@ -1266,6 +1264,12 @@ body.dark-theme .tag--organic-chemistry {
     grid-template-rows: repeat(2, auto); /* Two rows */
     gap: 1rem; /* Adjust spacing for larger screens */
   }
+  .publications__tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    gap: 0.5rem; 
+  }
   /* .publications__img{
     width: 320px;
   } */
@@ -1317,6 +1321,12 @@ body.dark-theme .tag--organic-chemistry {
     grid-template-columns: repeat(4, 1fr); /* Four columns of equal width */
     grid-template-rows: 1fr; /* Single row */
     gap: 0.5rem; /* Spacing between columns */    
+  }
+  .publications__tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    gap: 0.5rem;   
   }
   .swiper-highlight-icon{
     font-size: 3.5rem;

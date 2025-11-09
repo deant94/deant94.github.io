@@ -53,7 +53,7 @@ function setupTabs(buttonSelector, contentSelector, activeClass) {
 setupTabs('.history__button[data-target]', '.history__content[data-content]', 'history__active');
 
 // Publications tabs
-setupTabs('.publications__tab[data-target]', '.publications__content[data-content]', 'publications__active');
+setupTabs('.publications__subset[data-target]', '.publications__content[data-content]', 'publications__active');
 
 
 /*==================== PUBLICATIONS MODAL ====================*/
