@@ -220,6 +220,11 @@ img {
         border-radius: 1.5rem 1.5rem 0 0;
         transition: .3s;
     }
+
+    .scroll-progress-bar {
+      bottom: auto; /* Unset the bottom position */
+      top: 0;       /* Stick it to the top of the header */
+    }
 }
 
 .nav__list{
@@ -270,6 +275,18 @@ img {
 /* Change background header */
 .scroll-header{
   box-shadow: 0 -1px 4px rgba(0,0,0,.15);
+}
+
+/*==================== SCROLL PROGRESS BAR ====================*/
+.scroll-progress-bar {
+  height: 4px; /* Sets the thickness of the bar */
+  background: var(--first-color); /* Uses your main accent color */
+  width: 0%;
+  position: absolute; /* Positions it relative to the .header */
+  left: 0;
+  bottom: 0; /* Sticks it to the bottom of the header by default */
+  z-index: var(--z-fixed); /* Ensures it's on top of other content */
+  transition: width 0.1s linear; /* Adds a slight smoothing effect */
 }
 
 /*==================== HOME ====================*/
@@ -733,6 +750,11 @@ img {
   gap: 1.5rem;
   grid-template-columns: repeat(2, 1fr);
   justify-content: center;
+}
+
+/* Add pointer cursor to clickable cards in the 'All' tab */
+#all .publications__container .publications__content {
+    cursor: pointer;
 }
 
 .publications__section {

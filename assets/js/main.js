@@ -58,7 +58,7 @@ setupTabs('.publications__subset[data-target]', '.publications__content[data-con
 
 /*==================== PUBLICATIONS MODAL ====================*/
 const modalViews = document.querySelectorAll('.publications__modal');
-const modalBtns = document.querySelectorAll('.publications__content .publications__button');
+const modalBtns = document.querySelectorAll('.publications__content .publications__content');
 const modalCloses = document.querySelectorAll('.publications__modal-close');
 
 let openModal = function(modalClick) {
@@ -81,6 +81,20 @@ modalCloses.forEach(closeBtn => {
             history.back();
         } else {
             closeAllModals();
+        }
+    });
+});
+
+// Close modal when clicking on the overlay
+modalViews.forEach(modalView => {
+    modalView.addEventListener('click', (event) => {
+        // Check if the click is on the overlay (modalView) itself
+        if (event.target === modalView) {
+            if (history.state && history.state.modalOpen) {
+                history.back(); // Use history.back() to keep state consistent
+            } else {
+                closeAllModals(); // Fallback in case state isn't set
+            }
         }
     });
 });
@@ -198,3 +212,21 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('selected-icon', getCurrentIcon());
 });
 
+/*==================== SCROLL PROGRESS BAR ====================*/
+window.addEventListener('scroll', function() {
+  const scrollProgress = document.getElementById('scroll-progress');
+  
+  if (scrollProgress) {
+    // Get the total scrollable height of the page
+    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    
+    // Get the current vertical scroll position
+    const scrollTop = document.documentElement.scrollTop || window.scrollY;
+    
+    // Calculate the percentage scrolled
+    const scrolled = (scrollTop / totalHeight) * 100;
+    
+    // Update the width of the progress bar
+    scrollProgress.style.width = scrolled + '%';
+  }
+});
