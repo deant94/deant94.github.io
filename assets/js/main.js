@@ -130,6 +130,46 @@ let swiper = new Swiper('.highlight__container', {
   },
 });
 
+/*==================== HIGHLIGHTS MODAL ====================*/
+
+const highlightModals = document.querySelectorAll('.highlight__modal');
+const highlightItems = document.querySelectorAll('.highlight__item');
+const highlightCloses = document.querySelectorAll('.highlight__modal-close');
+
+let openHighlightModal = function(index) {
+    highlightModals.forEach(m => m.classList.remove('active-modal'));
+    highlightModals[index].classList.add('active-modal');
+};
+
+highlightItems.forEach((item) => {
+    item.addEventListener('click', () => {
+        const index = item.getAttribute('data-modal');
+        openHighlightModal(index);
+    });
+});
+
+highlightCloses.forEach(btn => {
+    btn.addEventListener('click', () => {
+        highlightModals.forEach(m => m.classList.remove('active-modal'));
+    });
+});
+
+// Close on background click
+highlightModals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            highlightModals.forEach(m => m.classList.remove('active-modal'));
+        }
+    });
+});
+
+// Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        highlightModals.forEach(m => m.classList.remove('active-modal'));
+    }
+});
+
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll('section[id]')
 
