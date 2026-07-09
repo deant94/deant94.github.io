@@ -132,41 +132,49 @@ let swiper = new Swiper('.highlight__container', {
 
 /*==================== HIGHLIGHTS MODAL ====================*/
 
-const highlightModals = document.querySelectorAll('.highlight__modal');
+const masterModal = document.getElementById('master-highlight-modal');
+const masterModalContent = document.getElementById('master-modal-content');
 const highlightItems = document.querySelectorAll('.highlight__item');
-const highlightCloses = document.querySelectorAll('.highlight__modal-close');
 
-let openHighlightModal = function(index) {
-    highlightModals.forEach(m => m.classList.remove('active-modal'));
-    highlightModals[index].classList.add('active-modal');
+let closeHighlightModal = function() {
+    if (masterModal) {
+        masterModal.classList.remove('active-modal');
+        // Clear the inner HTML so embedded videos stop playing in the background
+        masterModalContent.innerHTML = '';
+    }
 };
 
 highlightItems.forEach((item) => {
     item.addEventListener('click', () => {
-        const index = item.getAttribute('data-modal');
-        openHighlightModal(index);
-    });
-});
-
-highlightCloses.forEach(btn => {
-    btn.addEventListener('click', () => {
-        highlightModals.forEach(m => m.classList.remove('active-modal'));
-    });
-});
-
-// Close on background click
-highlightModals.forEach(modal => {
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            highlightModals.forEach(m => m.classList.remove('active-modal'));
+        const template = item.querySelector('.modal-template');
+        
+        if (template && masterModal && masterModalContent) {
+            // Copy the HTML from the specific item's template into the master modal
+            masterModalContent.innerHTML = template.innerHTML;
+            masterModal.classList.add('active-modal');
+            
+            // Attach a click listener to the newly created close button
+            const closeBtn = masterModalContent.querySelector('.highlight__modal-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeHighlightModal);
+            }
         }
     });
 });
 
-// Escape key
+// Close on background click
+if (masterModal) {
+    masterModal.addEventListener('click', (e) => {
+        if (e.target === masterModal) {
+            closeHighlightModal();
+        }
+    });
+}
+
+// Close with Escape key
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        highlightModals.forEach(m => m.classList.remove('active-modal'));
+    if (e.key === 'Escape' && masterModal && masterModal.classList.contains('active-modal')) {
+        closeHighlightModal();
     }
 });
 
