@@ -22,6 +22,7 @@
     --container-color: #fff;
     --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+    
 
     /*========== Font and typography ==========*/
     --body-font: 'Poppins', sans-serif;
@@ -67,6 +68,15 @@
         --small-font-size: .875rem;
         --smaller-font-size: .813rem;
     }
+}
+
+h3 a {
+  color: var(--first-color);
+  text-decoration: none;
+}
+
+h3 a:hover {
+  color: var(--first-color-alt);
 }
 
 /*========== Variables Dark theme ==========*/
