@@ -1,0 +1,42 @@
+#!/bin/sh
+# Blocks a push when tools/check.py reports a FAIL.
+#
+# Git hooks are not committed, so this lives in tools/hooks/ and has to be installed
+# into .git/hooks/ once per clone:
+#
+#     git config core.hooksPath tools/hooks
+#
+# That points git at this directory directly, so the hook survives re-cloning and any
+# future hooks added here are picked up automatically.
+#
+# To push anyway, bypassing the check:
+#
+#     git push --no-verify
+
+if command -v python >/dev/null 2>&1; then
+    PY=python
+elif command -v python3 >/dev/null 2>&1; then
+    PY=python3
+else
+    echo "pre-push: no python found, skipping site checks" >&2
+    exit 0
+fi
+
+echo "pre-push: verifying the site..."
+"$PY" "$(git rev-parse --show-toplevel)/tools/check.py"
+status=$?
+
+if [ $status -ne 0 ]; then
+    cat >&2 <<'EOF'
+
+pre-push: BLOCKED — the checks above found a problem.
+
+  Fix it, or run the full check yourself to see more:
+      python tools/check.py --live
+
+  To push regardless:
+      git push --no-verify
+EOF
+fi
+
+exit $status

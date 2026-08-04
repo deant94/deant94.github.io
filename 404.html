@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Page not found | Dr Dean Thomas FHEA</title>
+        <meta name="robots" content="noindex">
+        <meta name="theme-color" content="#fbfbfe" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#191627" media="(prefers-color-scheme: dark)">
+
+        <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+
+        <!-- Match whichever theme the visitor's system prefers, and remember an explicit choice -->
+        <script>
+            (function () {
+                try {
+                    var stored = localStorage.getItem('selected-theme');
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (stored === 'dark' || (!stored && prefersDark)) {
+                        document.documentElement.classList.add('dark-theme-preload');
+                    }
+                } catch (e) { /* light theme is a fine fallback */ }
+            })();
+        </script>
+
+        <style>
+            /* Centre the message in the viewport without pulling in the rest of the page's layout */
+            .notfound{
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            .notfound__code{
+                font-size: var(--big-font-size);
+                color: var(--first-color);
+                margin-bottom: var(--mb-0-5);
+            }
+            .notfound__text{
+                max-width: 32rem;
+                margin-bottom: var(--mb-2);
+            }
+        </style>
+    </head>
+    <body>
+        <main class="notfound">
+            <h1 class="notfound__code">404</h1>
+            <p class="section__subtitle">This page doesn&rsquo;t exist</p>
+            <p class="notfound__text">The link may be out of date, or the page may have moved. Everything is on the one main page.</p>
+            <!-- No Unicons stylesheet is loaded here on purpose, so no icon glyph either -->
+            <a href="/" class="button button--flex">Back to the homepage</a>
+        </main>
+
+        <!-- Loaded only so the theme class lands on <body>; harmless if it fails -->
+        <script>
+            (function () {
+                try {
+                    var stored = localStorage.getItem('selected-theme');
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (stored === 'dark' || (!stored && prefersDark)) {
+                        document.body.classList.add('dark-theme');
+                    }
+                    document.documentElement.classList.remove('dark-theme-preload');
+                } catch (e) { /* no-op */ }
+            })();
+        </script>
+    </body>
+</html>

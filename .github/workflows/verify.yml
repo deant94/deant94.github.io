@@ -1,0 +1,43 @@
+name: Verify site
+
+# A server-side safety net: this runs even if the local pre-push hook is bypassed,
+# or if a file is edited directly on github.com.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # beautifulsoup4 + html5lib enable the DOM and HTML-validity checks.
+      # Without them those checks report SKIP rather than failing.
+      - name: Install check dependencies
+        run: python -m pip install --quiet beautifulsoup4 lxml html5lib playwright
+
+      - name: Static checks
+        run: python tools/check.py
+
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Live browser checks
+        run: python tools/check.py --live --shots
+
+      # Screenshots are kept so a PR can be reviewed visually without checking it out.
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: .preview-shots/
+          if-no-files-found: warn
+          retention-days: 14

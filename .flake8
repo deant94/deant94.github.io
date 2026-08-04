@@ -1,0 +1,5 @@
+# The only Python here is the verification tooling in tools/. 79 columns makes those
+# checks harder to read than they need to be, so allow a little more room.
+[flake8]
+max-line-length = 110
+exclude = .git,__pycache__,.preview-shots

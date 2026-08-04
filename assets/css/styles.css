@@ -1,5 +1,6 @@
 /*==================== GOOGLE FONTS ====================*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+/* Loaded via a <link> in index.html instead of @import — an @import here cannot
+   start downloading until this whole stylesheet has arrived, delaying first paint. */
 
 /*==================== VARIABLES CSS ====================*/
 :root {
@@ -16,7 +17,10 @@
     --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
     --title-color: hsl(var(--hue-color), 8%, 15%);
     --text-color: hsl(var(--hue-color), 8%, 45%);
-    --text-color-light: hsl(var(--hue-color), 8%, 65%);
+    /* Was 65%, which is only 2.5:1 on this background — below the 4.5:1 WCAG AA
+       minimum, and it colours all 68 History date labels. 49% is the lightest value
+       that passes (4.6:1), so it stays as close to the original tone as possible. */
+    --text-color-light: hsl(var(--hue-color), 8%, 49%);
     --input-color: hsl(var(--hue-color), 70%, 96%);
     --body-color: hsl(var(--hue-color), 60%, 99%);
     --container-color: #fff;
@@ -80,7 +84,15 @@ h3 a:hover {
 }
 
 /*========== Variables Dark theme ==========*/
-body.dark-theme{
+/* html.dark-theme-preload is set by an inline script in <head> before first paint,
+   so a returning dark-theme visitor never sees a flash of the light theme. main.js
+   removes it once it has applied body.dark-theme. */
+html.dark-theme-preload{
+  background-color: hsl(250, 28%, 12%); /* matches --body-color in the dark theme */
+}
+
+body.dark-theme,
+html.dark-theme-preload body{
    /* HSL color mode */
    --first-color-second: hsl(var(--hue-color), 30%, 8%);
    --title-color: hsl(var(--hue-color), 8%, 95%);
@@ -88,6 +100,9 @@ body.dark-theme{
    --input-color: hsl(var(--hue-color), 29%, 16%);
    --body-color: hsl(var(--hue-color), 28%, 12%);
    --container-color: hsl(var(--hue-color), 29%, 16%);
+   /* On the dark background the original 65% already passes comfortably (6.8:1),
+      so keep the lighter tone here rather than inheriting the darkened light-theme value */
+   --text-color-light: hsl(var(--hue-color), 8%, 65%);
    --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
    --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
 }
@@ -162,9 +177,18 @@ img {
   margin-bottom: var(--mb-3);
 }
 
-.section__title, 
+.section__title,
 .section__subtitle{
   text-align: center;
+}
+
+/* The author/citation lines in the Traditional list are <p>, not headings, so they
+   no longer match the h1..h4 rule that supplied their colour and weight. Restated
+   here so they render exactly as before. Deliberately does not touch the
+   <span class="section__subtitle"> section subtitles, which never had either. */
+p.section__subtitle{
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
 }
 
 /*==================== LAYOUT ====================*/
@@ -226,7 +250,7 @@ img {
         width: 100%;
         background-color: var(--body-color);
         padding: 2rem 1.5rem 4rem;
-        box-shadow: 0 -1px 4 px rgba(0,0,0,.15);
+        box-shadow: 0 -1px 4px rgba(0,0,0,.15);
         border-radius: 1.5rem 1.5rem 0 0;
         transition: .3s;
     }
@@ -326,15 +350,6 @@ img {
   color: var(--first-color-alt);
 }
 
-.home__blob{
-  width: 300px;
-  height: 300px;
-  fill: var(--first-color);
-}
-
-.home__blob-img{
-  width: 130px;
-}
 
 .home__data{
   grid-column: 1/3;
@@ -353,6 +368,14 @@ img {
 
 .home__description{
   margin-bottom: var(--mb-2);
+}
+
+/* The hero used to carry an empty <p class="home__description"> purely so its
+   margin-bottom pushed the Contact button down. With that element gone the gap is
+   stated here instead. The subtitle already contributes its own --mb-0-75 below
+   itself, so subtract it to land on the same 2rem total gap as before. */
+.home__data .button{
+  margin-top: calc(var(--mb-2) - var(--mb-0-75));
 }
 
 .home__scroll{
@@ -422,58 +445,27 @@ img {
   background-color: transparent;
   color: var(--first-color-alt);
 }
-
-.btn-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.btn {
-  font-weight: 600;
-  transition: all 300ms ease;
-  padding: 1rem;
-  width: 8rem;
-  border-radius: 2rem;
-}
-
-.btn-color-1,
-.btn-color-2 {
-  border: rgb(53, 53, 53) 0.1rem solid;
-}
-
-.btn-color-1:hover,
-.btn-color-2:hover {
-  cursor: pointer;
-}
-
-.btn-color-1,
-.btn-color-2:hover {
-  background: rgb(53, 53, 53);
-  color: white;
-}
-
-.btn-color-1:hover {
-  background: rgb(0, 0, 0);
-}
-
-.btn-color-2 {
-  background: none;
-}
-
-.btn-color-2:hover {
-  border: rgb(255, 255, 255) 0.1rem solid;
-}
-
-.btn-container {
-  gap: 1rem;
-}
-
-
 /*==================== HIGHLIGHT ====================*/
 
+/* overflow:initial lets the arrows and the pagination (bottom:-2.5rem) sit outside the
+   container. The side effect was that every off-screen carousel slide pushed the page
+   wider, so the whole document had a horizontal scrollbar at almost every width. */
 .highlight__container{
   overflow: initial;
+}
+
+/* Below 1200px the arrows sit just .5rem outside the container, so the slides can be
+   clipped horizontally while a .5rem bleed keeps the arrows whole. overflow-y stays
+   visible so the pagination below the carousel still shows. `clip` not `hidden`, so no
+   scroll container is created and Swiper's cssMode is unaffected.
+   At 1200px and above the arrows are pulled a full 3.5rem out, and the viewport is
+   wide enough that the slides no longer overflow the page — so no clip is needed. */
+@media screen and (max-width: 1199px){
+  .highlight__container{
+    overflow-x: clip;
+    overflow-y: visible;
+    overflow-clip-margin: .5rem;
+  }
 }
 
 .highlight__content{
@@ -531,7 +523,9 @@ img {
   bottom: -2.5rem;
 }
 
-.swiper-pagination-bullets-active{
+/* Swiper's own class is bullet-active (singular); the plural form never matched,
+   so the current slide's dot was left the default grey. */
+.swiper-pagination-bullet-active{
   background-color: var(--first-color);
 }
 
@@ -610,6 +604,21 @@ img {
   max-width: 600px;
   width: 90%;
   position: relative;
+  /* The overlay centres this box, so without a height cap a long description simply
+     overflowed off both ends of the screen with no way to reach it. */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* The News modal headings had no rule at all, so they fell back to the browser
+   default h3 size instead of matching the Publications modal titles. */
+.highlight__modal-title {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+  margin-bottom: var(--mb-1-5);
+  text-align: center;
+  /* Leave room for the absolutely positioned close button */
+  padding-right: 1.5rem;
 }
 
 .highlight__modal-close {
@@ -618,6 +627,8 @@ img {
   right: 1rem;
   cursor: pointer;
   font-size: 1.5rem;
+  color: var(--first-color);
+  line-height: 1;
 }
 
 /*==================== ABOUT ====================*/
@@ -631,11 +642,11 @@ img {
 .about__researchinterestimg{
   width: 100%;
   height: auto;
-  border-radius: .5rem;
   display: block; /* Ensure it behaves like a block element */
   margin-left: auto; /* Center horizontally */
   margin-right: auto; /* Center horizontally */
   padding: 1rem 1rem;
+  /* A .5rem border-radius used to be declared here too, dead beneath this one */
   border-radius: 10rem;
   background-color: var(--container-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -677,10 +688,6 @@ img {
   text-align: justify;
 }
 
-.about__buttons{
-  display: flex;
-  justify-content: center;
-}
 
 /*==================== HISTORY ====================*/
 .history__tabs{
@@ -812,7 +819,10 @@ img {
   display: block;
 }
 
-.publications__button.publications__active{
+/* The tab elements carry .publications__subset, so the old
+   .publications__button.publications__active rule never matched and the selected
+   Publications tab was not highlighted the way the History tabs are. */
+.publications__subset.publications__active{
   color: var(--first-color);
 }
 
@@ -827,20 +837,6 @@ img {
     cursor: pointer;
 }
 
-.publications__section {
-  display: flex;
-  flex-direction: column; /* Stack icon and text vertically */
-  align-items: center;    /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-  text-align: center;     /* Center-align text inside the flex container */
-  font-size: var(--h3-font-size);
-  font-weight: var(--font-medium);
-  width: 100%;            /* Ensure it fills the parent container */
-  max-width: 1400px;      /* Set a maximum width for larger screens */
-  margin: 0 auto;         /* Center it within the parent */
-  padding: 1rem;          /* Add padding for spacing */
-  box-sizing: border-box; /* Include padding in the width calculation */
-}
 
 .publications__content{
   position: relative;
@@ -916,6 +912,9 @@ img {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  /* Same scroll trap as the News modal: a long abstract had no way to be reached */
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .publications__modal-publications {
@@ -925,11 +924,6 @@ img {
   width: 100%;
 }
 
-.publications__modal-service {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .publications__modal-title {
   font-size: var(--h3-font-size);
@@ -947,10 +941,6 @@ img {
   cursor: pointer;
 }
 
-.publications__modal-icon {
-  color: var(--first-color);
-  margin-right: var(--mb-0-25);
-}
 
 /*==================== PUBLICATIONS TAGS ====================*/
 .publication__tags {
@@ -972,33 +962,38 @@ img {
 }
 
 /* Tag colors for Light Theme */
+/* Tag text is 12px, so it needs 4.5:1 against its own pill background. The blue was
+   3.7:1 and the green 2.5:1; both are darkened to the lightest passing lightness. */
 .tag--digital-chemistry {
     background-color: hsl(200, 90%, 90%); /* Light blue */
-    color: hsl(200, 70%, 40%); /* Darker blue text */
+    color: hsl(200, 70%, 35%); /* Darker blue text — 4.6:1 */
 }
 
 .tag--supramolecular-chemistry {
     background-color: hsl(250, 90%, 90%); /* Light purple (from --hue-color) */
-    color: hsl(250, 70%, 40%); /* Darker purple text */
+    color: hsl(250, 70%, 40%); /* Darker purple text — 7.2:1, already passing */
 }
 
 .tag--organic-chemistry {
     background-color: hsl(90, 90%, 90%); /* Light green */
-    color: hsl(90, 70%, 40%); /* Darker green text */
+    color: hsl(90, 70%, 29%); /* Darker green text — 4.5:1 */
 }
 
 /* Tag colors for Dark Theme */
-body.dark-theme .tag--digital-chemistry {
+body.dark-theme .tag--digital-chemistry,
+html.dark-theme-preload .tag--digital-chemistry {
     background-color: hsl(200, 40%, 25%); /* Darker blue */
     color: hsl(200, 70%, 75%); /* Lighter blue text */
 }
 
-body.dark-theme .tag--supramolecular-chemistry {
+body.dark-theme .tag--supramolecular-chemistry,
+html.dark-theme-preload .tag--supramolecular-chemistry {
     background-color: hsl(250, 40%, 25%); /* Darker purple */
     color: hsl(250, 70%, 75%); /* Lighter purple text */
 }
 
-body.dark-theme .tag--organic-chemistry {
+body.dark-theme .tag--organic-chemistry,
+html.dark-theme-preload .tag--organic-chemistry {
     background-color: hsl(90, 40%, 25%); /* Darker green */
     color: hsl(90, 70%, 75%); /* Lighter green text */
 }
@@ -1032,6 +1027,18 @@ body.dark-theme .tag--organic-chemistry {
   margin-bottom: var(--mb-2);
 }
 
+/* The email address and the Bluesky handle are single unbreakable tokens, so once the
+   Contact grid goes to two columns they pushed past their column and gave the page a
+   horizontal scrollbar around 565-585px. min-width:0 lets the flex item shrink below
+   its content width, and the wrap rule lets the token itself break. */
+.contact__information > div{
+  min-width: 0;
+}
+
+.contact__information .contact__title{
+  overflow-wrap: anywhere;
+}
+
 .contact__icon{
   font-size: 2rem;
   color: var(--first-color);
@@ -1044,32 +1051,6 @@ body.dark-theme .tag--organic-chemistry {
   /* color: #fff; */
 }
 
-.contact__subtitle{
-  font-size: var(--small-font-size);
-  color: var(--text-color-light);
-}
-
-.contact__content{
-  background-color: var(--input-color);
-  border-radius: .5rem;
-  padding: .75rem 1rem .25rem;
-}
-
-.contact__label{
-  font-size: var(--small-font-size);
-  color: var(--title-color)
-}
-
-.contact__input{
-  width: 100%;
-  background-color: var(--input-color);
-  color: var(--text-color);
-  font-family: var(--body-font);
-  font-size: var(--normal-font-size);
-  border: none;
-  outline: none;
-  padding: .25rem .5rem .5rem 0;
-}
 
 /* Default and visited states for contact links */
 .contact__title + a:link,
@@ -1099,6 +1080,9 @@ body.dark-theme .tag--organic-chemistry {
 
 .footer__title{
   font-size: var(--h1-font-size);
+  /* Stated explicitly because this is a <p>, not a heading: the page already has
+     its one <h1> in the hero, and a second one in the footer competed with it. */
+  font-weight: var(--font-semi-bold);
   margin-bottom: var(--mb-0-25);
 }
 
@@ -1196,14 +1180,8 @@ body.dark-theme .tag--organic-chemistry {
   .home__content{
     grid-template-columns: .25fr 3fr;
   }
-  .home__blob{
-    width: 180px;
-  }
   .history__data{
     gap: .5rem;
-  }
-  .project__img{
-    width: 200px;
   }
   .history__tabs {
     display: grid; /* Enables grid layout */
@@ -1322,9 +1300,6 @@ body.dark-theme .tag--organic-chemistry {
     padding-top: 5.5rem;
     column-gap: 2rem;
   }
-  .home__blob{
-    width: 270px;
-  }
   .home__scroll{
     display: block;
   }
@@ -1343,9 +1318,6 @@ body.dark-theme .tag--organic-chemistry {
   }
   .about__info{
     justify-content: space-between;
-  }
-  .about__buttons{
-    justify-content: initial;
   }
   .history__button{
     margin: 0 var(--mb-1);
@@ -1385,7 +1357,9 @@ body.dark-theme .tag--organic-chemistry {
     column-gap: 2rem;
   }
   .footer__social{
-    justify-self: flex-end;
+    /* justify-self takes end, not flex-end — the invalid value was simply dropped,
+       so the social icons never actually right-aligned in the footer grid. */
+    justify-self: end;
   }
   .about__researchinterestimg {
     width: 550px;
@@ -1401,9 +1375,6 @@ body.dark-theme .tag--organic-chemistry {
   .main,
   .footer__container{
     padding: 0;
-  }
-  .home__blob{
-    width: 320px;
   }
   .home__social{
     transform: translateX(-6rem);
@@ -1429,22 +1400,133 @@ body.dark-theme .tag--organic-chemistry {
   .swiper-highlight-icon{
     font-size: 3.5rem;
   }
+  .swiper-container-horizontal > .swiper-pagination-bullets{
+    bottom: -4.5rem;
+  }
+  .about__researchinterestimg {
+    width: 650px;
+  }
+}
+
+/*==================== CAROUSEL ARROWS OUTSIDE THE CONTAINER ====================*/
+/* The arrows are pulled 3.5rem outside a max-width:1000px container. That only fits
+   once the viewport is wide enough to absorb it — at 1024–1140px it pushed past the
+   right edge and produced a horizontal scrollbar on the whole page. Below 1200px the
+   arrows stay at their base position just inside the container instead. */
+@media screen and (min-width: 1200px){
   .swiper-button-prev{
     left: -3.5rem;
   }
   .swiper-button-next{
-    right:-3.5rem;
+    right: -3.5rem;
   }
-  .swiper-container-horizontal > .swiper-pagination-bullets{
-    bottom: -4.5rem;
+}
+
+/*==================== SKIP LINK ====================*/
+/* Lets keyboard and screen-reader users jump past the nav straight to the content.
+   Visually hidden until focused. */
+.skip-link{
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: calc(var(--z-modal) + 1);
+  padding: .75rem 1rem;
+  background-color: var(--first-color);
+  color: #fff;
+  border-radius: 0 0 .5rem 0;
+  font-weight: var(--font-medium);
+}
+
+.skip-link:focus{
+  left: 0;
+}
+
+/*==================== VISIBLE FOCUS ====================*/
+/* Several controls are icons and divs rather than native buttons, and a few rules
+   above set outline:none. Without a replacement indicator there is no way to tell
+   where keyboard focus is, so restore one consistently for keyboard users only. */
+:focus-visible{
+  outline: 2px solid var(--first-color);
+  outline-offset: 2px;
+  border-radius: .25rem;
+}
+
+.swiper-button-prev:focus-visible,
+.swiper-button-next:focus-visible,
+.nav__link:focus-visible,
+.footer__link:focus-visible,
+.footer__social:focus-visible,
+.home__social-icon:focus-visible,
+.highlight__item:focus-visible,
+.history__button:focus-visible,
+.publications__subset:focus-visible,
+.change-theme:focus-visible,
+.nav__toggle:focus-visible,
+.nav__close:focus-visible{
+  outline: 2px solid var(--first-color);
+  outline-offset: 2px;
+}
+
+/* The footer sits on the accent colour, so an accent outline would not be visible */
+.footer__link:focus-visible,
+.footer__social:focus-visible{
+  outline-color: #fff;
+}
+
+/*==================== DARK THEME SHADOW DEPTH ====================*/
+/* The card and tab shadows are tuned for a light background. On the dark body they
+   are effectively invisible, which flattens the cards and tabs, so deepen them. */
+body.dark-theme .highlight__item:hover,
+body.dark-theme .history__button:hover,
+body.dark-theme .publications__subset:hover,
+body.dark-theme .publications__content:hover,
+body.dark-theme .about__researchinterestimg:hover{
+  box-shadow: 0 8px 16px rgba(0,0,0,.5);
+}
+
+body.dark-theme .highlight__item,
+body.dark-theme .history__button,
+body.dark-theme .publications__subset,
+body.dark-theme .publications__content,
+body.dark-theme .about__researchinterestimg{
+  box-shadow: 0 2px 4px rgba(0,0,0,.4);
+}
+
+body.dark-theme .scroll-header{
+  box-shadow: 0 -1px 4px rgba(0,0,0,.5);
+}
+
+/*==================== SCROLL UP STACKING ====================*/
+/* --z-tooltip (10) put the button underneath the fixed header (--z-fixed, 100),
+   so on mobile — where the header is pinned to the bottom — it was clipped by it. */
+.scrollup{
+  z-index: var(--z-fixed);
+}
+
+/*==================== REDUCED MOTION ====================*/
+/* Honour an operating-system preference for less animation: drop the smooth
+   scrolling, hover lifts and transitions rather than removing them for everyone. */
+@media (prefers-reduced-motion: reduce){
+  html{
+    scroll-behavior: auto;
   }
-  .contact__form{
-    width: 460px;
+
+  *,
+  *::before,
+  *::after{
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
-  .contact__inputs{
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .about__researchinterestimg {
-    width: 650px;
+
+  .highlight__item:hover,
+  .history__button:hover,
+  .publications__subset:hover,
+  .about__researchinterestimg:hover,
+  .home__scroll-button:hover,
+  .highlight__button:hover .button__icon,
+  .publications__button:hover .button__icon{
+    transform: none;
   }
 }
