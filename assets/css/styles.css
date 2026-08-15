@@ -621,6 +621,14 @@ p.section__subtitle{
   padding-right: 1.5rem;
 }
 
+/* Buttons are inline-flex, so a modal offering more than one link ran them straight
+   into each other. Wrapping row keeps them apart and lets them stack on narrow screens. */
+.highlight__modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
 .highlight__modal-close {
   position: absolute;
   top: 1rem;
