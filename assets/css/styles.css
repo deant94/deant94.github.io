@@ -601,7 +601,9 @@ p.section__subtitle{
   background: var(--container-color);
   padding: 2rem;
   border-radius: .5rem;
-  max-width: 600px;
+  /* 600px left the box feeling cramped: the video embeds were small and a modal with
+     three call-to-action buttons wrapped them onto a second row. */
+  max-width: 720px;
   width: 90%;
   position: relative;
   /* The overlay centres this box, so without a height cap a long description simply
