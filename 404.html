@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Page not found | Dr Dean Thomas FHEA</title>
+        <title>Page not found | Thomas Lab</title>
         <meta name="robots" content="noindex">
         <meta name="theme-color" content="#fbfbfe" media="(prefers-color-scheme: light)">
         <meta name="theme-color" content="#191627" media="(prefers-color-scheme: dark)">
@@ -52,13 +52,36 @@
                 max-width: 32rem;
                 margin-bottom: var(--mb-2);
             }
+            /* The site is several pages now, so a miss offers the whole map rather
+               than a single "go home" button. */
+            .notfound__links{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--mb-1);
+                margin-bottom: var(--mb-2);
+            }
+            .notfound__link{
+                color: var(--title-color);
+                font-weight: var(--font-medium);
+            }
+            .notfound__link:hover{ color: var(--first-color); }
         </style>
     </head>
     <body>
         <main class="notfound">
             <h1 class="notfound__code">404</h1>
             <p class="section__subtitle">This page doesn&rsquo;t exist</p>
-            <p class="notfound__text">The link may be out of date, or the page may have moved. Everything is on the one main page.</p>
+            <p class="notfound__text">The link may be out of date, or the page may have moved.</p>
+
+            <nav class="notfound__links" aria-label="Site sections">
+                <a href="/#news" class="notfound__link">News</a>
+                <a href="/about/" class="notfound__link">About Dean</a>
+                <a href="/publications/" class="notfound__link">Publications</a>
+                <a href="/media/" class="notfound__link">Media</a>
+                <a href="/contact/" class="notfound__link">Contact</a>
+            </nav>
+
             <!-- No Unicons stylesheet is loaded here on purpose, so no icon glyph either -->
             <a href="/" class="button button--flex">Back to the homepage</a>
         </main>

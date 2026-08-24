@@ -344,14 +344,37 @@ const header = document.getElementById('header')
 const scrollUpButton = document.getElementById('scroll-up')
 const scrollProgress = document.getElementById('scroll-progress')
 
+/* The nav is now cross-page ('/', '/#news', '/about/'), so a section can no longer be
+   paired with its link by '#id' alone. Resolve every nav link against the current URL
+   and keep only those that land on this page. */
+const herePath = window.location.pathname.replace(/index\.html$/, '')
+
+const localNavTargets = Array.from(document.querySelectorAll('.nav__menu .nav__link'))
+    .map(link => {
+        const url = new URL(link.getAttribute('href'), window.location.href)
+        return { link, path: url.pathname.replace(/index\.html$/, ''), hash: url.hash }
+    })
+    .filter(target => target.path === herePath)
+
 /* Pre-resolve each section's nav link once. Sections without a matching link are
-   simply skipped, rather than throwing on every scroll event. */
-const sectionLinks = Array.from(sections).map(section => ({
-    section,
-    link: document.querySelector(`.nav__menu a[href="#${section.id}"]`)
-}))
+   simply skipped, rather than throwing on every scroll event. The hashless link to
+   this page — Home on '/' — owns the page's first section. */
+const hashlessLocal = localNavTargets.find(target => !target.hash)
+
+const sectionLinks = Array.from(sections).map((section, index) => {
+    const exact = localNavTargets.find(target => target.hash === `#${section.id}`)
+    if (exact) return { section, link: exact.link }
+    return { section, link: (index === 0 && hashlessLocal) ? hashlessLocal.link : null }
+})
+
+/* On a sub-page every nav link points elsewhere, so there is nothing to spy on: the
+   highlight belongs to the current *page* and is already set in the markup. Bailing
+   out keeps the first scroll from clearing it. */
+const navHasLocalAnchors = localNavTargets.some(target => target.hash)
 
 function scrollActive(scrollY){
+    if (!navHasLocalAnchors) return
+
     sectionLinks.forEach(({ section, link }) =>{
         if (!link) return
 
@@ -426,8 +449,8 @@ const darkTheme = 'dark-theme';
 const iconTheme = 'uil-sun';
 
 // SVG image files for light and dark themes
-const darkResearchInterestImageSrc = 'assets/img/researchinterestdark.svg';
-const lightResearchInterestImageSrc = 'assets/img/researchinterest.svg';
+const darkResearchInterestImageSrc = '/assets/img/researchinterestdark.svg';
+const lightResearchInterestImageSrc = '/assets/img/researchinterest.svg';
 
 // Check previously selected theme (if any)
 const selectedTheme = localStorage.getItem('selected-theme');

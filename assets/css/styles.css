@@ -141,6 +141,21 @@ body {
   font-size: var(--normal-font-size);
   background-color: var(--body-color);
   color: var(--text-color);
+
+  /* Sticky footer. The site used to be one long page that always overflowed the
+     viewport; the short sub-pages (Contact, Media) do not, and without this the
+     footer sits mid-screen with bare background beneath it. Only <main> and
+     <footer> are in normal flow — the header, skip link, scroll-top control and
+     every modal are fixed or absolute, so none of them become flex items. */
+  display: flex;
+  flex-direction: column;
+  /* Discount the bottom margin reserved for the fixed mobile nav, or the target
+     height would exceed the viewport and give every page a needless scrollbar. */
+  min-height: calc(100vh - var(--header-height));
+}
+
+.main{
+  flex: 1 0 auto;
 }
 
 h1, h2, h3, h4 {
@@ -674,6 +689,13 @@ p.section__subtitle{
   margin-bottom: var(--mb-0-25);
   margin: 0 auto;
   /* max-width: 95%; */
+}
+
+/* The lab intro on the front page is one column of prose, unlike .about__container
+   which pairs a portrait with the biography. Capping the measure keeps the lines
+   readable instead of running the full width of a desktop viewport. */
+.research__intro{
+  max-width: 46rem;
 }
 
 .about__info-title{

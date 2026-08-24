@@ -34,7 +34,33 @@ import threading
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PAGES = ['index.html', '404.html']
+
+def discover_pages():
+    """Every HTML page in the site, found rather than listed so adding a sub-page
+    directory never silently escapes the checks. Underscore-prefixed files are working
+    scratch (e.g. _original.html) and are not published."""
+    pages = []
+    for root, dirs, files in os.walk(REPO):
+        dirs[:] = [d for d in dirs if not d.startswith('.')
+                   and d not in ('__pycache__', 'tools', 'assets')]
+        for fn in files:
+            if fn.endswith('.html') and not fn.startswith('_'):
+                rel = os.path.relpath(os.path.join(root, fn), REPO).replace(os.sep, '/')
+                pages.append(rel)
+    # index.html first so failures read in page order, not alphabetical
+    return sorted(pages, key=lambda p: (p.count('/'), p))
+
+
+PAGES = discover_pages()
+
+# The URL each page is actually served at. GitHub Pages serves about/index.html as
+# /about/, so that — not the file path — is what the browser checks must request.
+# 404.html is only ever reached through a miss, so it is not in the walk.
+PAGE_URLS = {
+    p: '/' if p == 'index.html' else '/' + p[:-len('index.html')]
+    for p in PAGES if p.endswith('index.html')
+}
+
 TEXT_SOURCES = PAGES + [
     'site.webmanifest', 'assets/css/styles.css', 'assets/js/main.js',
 ]
@@ -113,7 +139,15 @@ def check_references_resolve():
         for raw in set(re.findall(r'(?:src|href)="([^"]+)"', html)):
             if re.match(r'(?:https?:|mailto:|data:|tel:|//|#)', raw) or raw in ('', '/'):
                 continue
-            verify(raw.lstrip('/').split('?')[0].split('#')[0], page, raw)
+            path = raw.lstrip('/').split('?')[0].split('#')[0]
+            if not path:
+                continue
+            # A directory URL like /about/ is served by the index.html inside it. Left
+            # as 'about/', the trailing empty segment would be reported as a case
+            # mismatch against a directory listing that can never contain ''.
+            if path.endswith('/'):
+                path += 'index.html'
+            verify(path, page, raw)
 
     css = read('assets/css/styles.css')
     for raw in re.findall(r'url\(["\']?([^"\')]+)', css):
@@ -194,22 +228,39 @@ def check_duplicate_ids():
 
 
 def check_single_h1():
+    """Every page needs its own top-level heading. Reported in full rather than
+    returning at the first offender, which used to hide the rest."""
+    problems = []
     for page in PAGES:
         n = len(re.findall(r'<h1\b', strip_comments(read(page))))
         if n != 1:
-            record('WARN' if n == 0 else 'FAIL', f'{page}: exactly one <h1>', f'found {n}')
-            return
-    record('PASS', 'exactly one <h1> per page')
+            problems.append(f'{page}: found {n}')
+    record('FAIL' if any('found 0' not in p for p in problems)
+           else 'WARN' if problems else 'PASS',
+           'exactly one <h1> per page',
+           '; '.join(problems) if problems else f'{len(PAGES)} pages')
 
 
 def check_nav_active_state():
-    """Regression guard: every nav link once shipped class="nav__link active-link",
-    so the whole menu rendered highlighted until the first scroll event."""
-    html = read('index.html')
-    active = re.findall(r'<a href="#[^"]*" class="nav__link active-link"', html)
-    record('FAIL' if len(active) > 1 else 'PASS', 'at most one nav link starts active',
-           f'{len(active)} nav links hardcode active-link' if len(active) > 1
-           else f'{len(active)} (scroll handler drives the rest)')
+    """Each page highlights its own nav entry and only its own.
+
+    Regression guard: every nav link once shipped class="nav__link active-link", so the
+    whole menu rendered highlighted until the first scroll event. Now that the nav is
+    cross-page the highlight is page-level, so exactly one is not just tolerated but
+    required — main.js deliberately leaves it alone on the sub-pages."""
+    problems = []
+    for page in PAGES:
+        html = strip_comments(read(page))
+        if 'nav__link' not in html:
+            continue  # 404.html carries no nav
+        active = re.findall(r'class="nav__link active-link"', html)
+        current = re.findall(r'aria-current="page"', html)
+        if len(active) != 1:
+            problems.append(f'{page}: {len(active)} nav links marked active')
+        elif len(current) != 1:
+            problems.append(f'{page}: {len(current)} aria-current, expected 1')
+    record('FAIL' if problems else 'PASS', 'exactly one nav link starts active',
+           '; '.join(problems) if problems else 'one per page, matching aria-current')
 
 
 def check_modal_pairing():
@@ -223,7 +274,11 @@ def check_modal_pairing():
     except ImportError:
         record('SKIP', 'publications modal pairing', 'needs beautifulsoup4')
         return
-    soup = BeautifulSoup(read('index.html'), 'html.parser')
+    page = next((p for p in PAGES if 'publications__modal' in read(p)), None)
+    if page is None:
+        record('WARN', 'publications modal pairing', 'no page contains publications modals')
+        return
+    soup = BeautifulSoup(read(page), 'html.parser')
     js = read('assets/js/main.js')
     trig_sel = re.search(r"modalBtns\s*=\s*document\.querySelectorAll\('([^']+)'\)", js)
     view_sel = re.search(r"modalViews\s*=\s*document\.querySelectorAll\('([^']+)'\)", js)
@@ -235,23 +290,42 @@ def check_modal_pairing():
     ok = len(triggers) == len(views)
     aligned = ok and all(v in t.select('.publications__modal') for t, v in zip(triggers, views))
     record('PASS' if (ok and aligned) else 'FAIL', 'publications modal pairing',
-           f'{len(triggers)} triggers vs {len(views)} modals, index-aligned={aligned}')
+           f'{page}: {len(triggers)} triggers vs {len(views)} modals, aligned={aligned}')
 
 
-def check_sections_have_nav_links():
-    """main.js maps every section[id] to a nav link; a section without one is skipped."""
-    try:
-        from bs4 import BeautifulSoup
-    except ImportError:
-        record('SKIP', 'sections have nav links', 'needs beautifulsoup4')
-        return
-    soup = BeautifulSoup(read('index.html'), 'html.parser')
-    missing = [
-        section['id'] for section in soup.select('section[id]')
-        if not soup.select('.nav__menu a[href="#%s"]' % section['id'])
-    ]
-    record('WARN' if missing else 'PASS', 'sections have a nav link',
-           f'no nav link for: {missing}' if missing else 'all sections linked')
+def check_internal_anchors():
+    """Every in-site link that carries a #fragment must land on a real element.
+
+    This matters far more now the site is multi-page: '/about/#history' points into a
+    document the link does not live in, so nothing in the browser or in a local click-
+    through reveals a typo — the page simply loads at the top and looks fine.
+    """
+    broken = []
+    for page in PAGES:
+        html = strip_comments(read(page))
+        page_dir = os.path.dirname(page)
+        for raw in sorted(set(re.findall(r'(?:src|href)="([^"]*#[^"]*)"', html))):
+            if re.match(r'(?:https?:|mailto:|data:|tel:|//)', raw):
+                continue
+            target, _, frag = raw.partition('#')
+            if not frag:
+                continue
+            if target == '':
+                doc = page                       # same-document anchor
+            elif target.startswith('/'):
+                doc = target.lstrip('/')
+            else:
+                doc = os.path.normpath(os.path.join(page_dir, target)).replace(os.sep, '/')
+            if doc.endswith('/') or doc == '':
+                doc += 'index.html'
+            if doc not in PAGES:
+                broken.append(f'{page}: {raw} -> no such page {doc}')
+                continue
+            if not re.search(r'\bid="%s"' % re.escape(frag), strip_comments(read(doc))):
+                broken.append(f'{page}: {raw} -> no id="{frag}" on {doc}')
+    record('FAIL' if broken else 'PASS', 'internal anchors resolve',
+           f'{len(broken)} broken\n      ' + '\n      '.join(broken[:8])
+           if broken else 'every #fragment exists on its target page')
 
 
 def check_unreferenced_assets():
@@ -304,7 +378,9 @@ def check_lazy_loading():
 
 
 def check_seo_head():
-    html = read('index.html')
+    """Each page needs its own metadata. A split site that copies one <head> everywhere
+    gives every page the same title, description and canonical URL, which is worse for
+    search than the single page was."""
     need = {
         'meta description': r'<meta\s+name="description"',
         'canonical': r'<link\s+rel="canonical"',
@@ -314,16 +390,36 @@ def check_seo_head():
         'theme-color': r'name="theme-color"',
         'JSON-LD': r'application/ld\+json',
     }
-    missing = [k for k, pat in need.items() if not re.search(pat, html)]
-    record('WARN' if missing else 'PASS', 'SEO / social metadata',
-           f'missing: {missing}' if missing else f'{len(need)} present')
-    m = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
-    if m:
-        try:
-            json.loads(m.group(1))
-            record('PASS', 'JSON-LD is valid JSON')
-        except Exception as exc:
-            record('FAIL', 'JSON-LD is valid JSON', str(exc))
+    content_pages = [p for p in PAGES if p != '404.html']
+    problems, canonicals, titles = [], {}, {}
+    for page in content_pages:
+        html = read(page)
+        missing = [k for k, pat in need.items() if not re.search(pat, html)]
+        if missing:
+            problems.append(f'{page}: missing {missing}')
+        m = re.search(r'<link rel="canonical" href="([^"]+)"', html)
+        canonicals.setdefault(m.group(1) if m else '(none)', []).append(page)
+        t = re.search(r'<title>(.*?)</title>', html, re.S)
+        titles.setdefault(t.group(1).strip() if t else '(none)', []).append(page)
+
+    for value, pages in list(canonicals.items()) + list(titles.items()):
+        if len(pages) > 1:
+            problems.append(f'{len(pages)} pages share {value!r}: {pages}')
+
+    record('WARN' if problems else 'PASS', 'SEO / social metadata',
+           '\n      '.join(problems) if problems
+           else f'{len(need)} tags on each of {len(content_pages)} pages, all distinct')
+
+    bad = []
+    for page in content_pages:
+        for m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>',
+                             read(page), re.S):
+            try:
+                json.loads(m.group(1))
+            except Exception as exc:
+                bad.append(f'{page}: {exc}')
+    record('FAIL' if bad else 'PASS', 'JSON-LD is valid JSON',
+           '; '.join(bad) if bad else f'valid on {len(content_pages)} pages')
 
 
 def check_charset_first():
@@ -471,104 +567,185 @@ def run_live(shots_dir=None):
                 record('SKIP', 'live browser checks', f'could not launch Chromium: {exc}')
                 return
 
-            errors, failed = [], []
-            page = browser.new_page(viewport={'width': 1280, 'height': 900})
-            page.on('pageerror', lambda e: errors.append(str(e)))
-            page.on('requestfailed',
-                    lambda r: failed.append(r.url) if r.url.startswith(base) else None)
+            # Every page runs the same shared bundle, so a page that merely lacks a
+            # carousel or a modal is exactly where a new "cannot read property of
+            # undefined" shows up. Loading only the front page would miss all of it.
+            all_errors, all_failed, opened_pages, statuses = {}, {}, {}, {}
 
-            resp = page.goto(base, wait_until='load')
-            page.wait_for_timeout(2500)
-            record('PASS' if resp.status == 200 else 'FAIL', 'page returns 200',
-                   f'HTTP {resp.status}')
+            for src in PAGE_URLS:
+                url_path = PAGE_URLS[src]
+                errors, failed = [], []
+                p = browser.new_page(viewport={'width': 1280, 'height': 900})
+                p.on('pageerror', lambda e, acc=errors: acc.append(str(e)))
+                p.on('requestfailed',
+                     lambda r, acc=failed: acc.append(r.url) if r.url.startswith(base) else None)
 
-            # scroll the whole page so lazy images are actually requested
-            page.evaluate("""async () => {
-                for (let y = 0; y < document.body.scrollHeight; y += 700) {
-                    window.scrollTo(0, y); await new Promise(r => setTimeout(r, 80));
-                }
-                window.scrollTo(0, 0);
-            }""")
-            page.wait_for_timeout(2000)
+                # 'load' waits on every third-party resource — web fonts, the icon
+                # font, the YouTube embeds — any of which can stall well past the
+                # timeout and fail a run that has nothing wrong with it. The checks
+                # below only care about this origin, so wait for the document and
+                # then for the images explicitly.
+                resp = p.goto(base.rstrip('/') + url_path, wait_until='domcontentloaded')
+                p.wait_for_timeout(1200)
+                statuses[url_path] = resp.status
 
-            record('FAIL' if errors else 'PASS', 'no uncaught JS errors',
-                   '; '.join(errors[:3]) if errors else 'clean')
-            record('FAIL' if failed else 'PASS', 'no failed same-origin requests',
-                   '; '.join(u.replace(base, '/') for u in failed[:5]) if failed else 'none')
+                # scroll the whole page so lazy images are actually requested
+                p.evaluate("""async () => {
+                    for (let y = 0; y < document.body.scrollHeight; y += 700) {
+                        window.scrollTo(0, y); await new Promise(r => setTimeout(r, 80));
+                    }
+                    window.scrollTo(0, 0);
+                }""")
+                try:
+                    p.wait_for_function(
+                        'Array.from(document.images).every(i => i.complete)',
+                        timeout=20000)
+                except Exception:
+                    pass  # let the decode check below report which image is stuck
+                p.wait_for_timeout(500)
 
-            broken = page.evaluate("""Array.from(document.images)
-                .filter(i => i.complete && i.naturalWidth === 0)
-                .map(i => i.getAttribute('src'))""")
-            total = page.evaluate('document.images.length')
-            record('FAIL' if broken else 'PASS', 'all images decode',
-                   f'{len(broken)} broken: {broken[:5]}' if broken else f'{total}/{total} rendered')
+                all_errors[url_path] = errors
+                all_failed[url_path] = failed
+                opened_pages[src] = p
+
+            bad_status = {u: s for u, s in statuses.items() if s != 200}
+            record('FAIL' if bad_status else 'PASS', 'every page returns 200',
+                   '; '.join(f'{u} -> HTTP {s}' for u, s in bad_status.items())
+                   if bad_status else f'{len(statuses)} pages OK')
+
+            err_pages = {u: e for u, e in all_errors.items() if e}
+            record('FAIL' if err_pages else 'PASS', 'no uncaught JS errors',
+                   '; '.join(f'{u}: {e[0]}' for u, e in list(err_pages.items())[:3])
+                   if err_pages else f'clean on {len(PAGE_URLS)} pages')
+
+            fail_pages = {u: f for u, f in all_failed.items() if f}
+            record('FAIL' if fail_pages else 'PASS', 'no failed same-origin requests',
+                   '; '.join(f'{u}: {f[0].replace(base, "/")}'
+                             for u, f in list(fail_pages.items())[:3])
+                   if fail_pages else 'none')
+
+            broken_all, total_all = [], 0
+            for src, p in opened_pages.items():
+                broken = p.evaluate("""Array.from(document.images)
+                    .filter(i => i.complete && i.naturalWidth === 0)
+                    .map(i => i.getAttribute('src'))""")
+                total_all += p.evaluate('document.images.length')
+                broken_all += [f'{PAGE_URLS[src]}: {b}' for b in broken]
+            record('FAIL' if broken_all else 'PASS', 'all images decode',
+                   f'{len(broken_all)} broken: {broken_all[:5]}'
+                   if broken_all else f'{total_all}/{total_all} rendered across {len(PAGE_URLS)} pages')
 
             # horizontal scrollbar: check real scrollability, not scrollWidth, because
             # overflow:clip suppresses the scrollbar without changing scrollWidth
             scrolls = []
-            for w in range(320, 1501, 20):
-                page.set_viewport_size({'width': w, 'height': 900})
-                page.wait_for_timeout(70)
-                page.evaluate('window.scrollTo(9999, 0)')
-                page.wait_for_timeout(40)
-                if page.evaluate('window.scrollX'):
-                    scrolls.append(w)
-                page.evaluate('window.scrollTo(0, 0)')
+            for src, p in opened_pages.items():
+                for w in range(320, 1501, 20):
+                    p.set_viewport_size({'width': w, 'height': 900})
+                    p.wait_for_timeout(60)
+                    p.evaluate('window.scrollTo(9999, 0)')
+                    p.wait_for_timeout(30)
+                    if p.evaluate('window.scrollX'):
+                        scrolls.append(f'{PAGE_URLS[src]}@{w}')
+                    p.evaluate('window.scrollTo(0, 0)')
+                p.set_viewport_size({'width': 1280, 'height': 900})
             record('FAIL' if scrolls else 'PASS', 'no horizontal scrollbar',
-                   f'scrolls at: {scrolls}' if scrolls else 'clean 320-1500px')
+                   f'scrolls at: {scrolls[:8]}' if scrolls else
+                   f'clean 320-1500px on {len(PAGE_URLS)} pages')
 
-            page.set_viewport_size({'width': 1280, 'height': 900})
-            page.wait_for_timeout(300)
+            # the nav must highlight the page you are actually on
+            wrong = []
+            for src, p in opened_pages.items():
+                marked = p.evaluate("""Array.from(document.querySelectorAll('.nav__link.active-link'))
+                    .map(a => a.getAttribute('href'))""")
+                if len(marked) != 1:
+                    wrong.append(f'{PAGE_URLS[src]}: {len(marked)} active')
+            record('FAIL' if wrong else 'PASS', 'nav highlights the current page',
+                   '; '.join(wrong) if wrong else 'one active link per page after load')
 
-            carousels = page.evaluate("""Array.from(document.querySelectorAll('.highlight__container'))
-                .map(el => ({section: el.closest('section').id, ready: !!el.swiper}))""")
-            dead = [c['section'] for c in carousels if not c['ready']]
+            carousels, dead = [], []
+            for src, p in opened_pages.items():
+                found = p.evaluate("""Array.from(document.querySelectorAll('.highlight__container'))
+                    .map(el => ({section: el.closest('section').id, ready: !!el.swiper}))""")
+                carousels += found
+                dead += [f'{PAGE_URLS[src]}#{c["section"]}' for c in found if not c['ready']]
             record('FAIL' if dead else 'PASS', 'carousels initialise',
                    f'not initialised: {dead}' if dead else
                    f"{len(carousels)} ready ({', '.join(c['section'] for c in carousels)})")
 
             # a news card must open the shared modal and Escape must close it
-            page.eval_on_selector('.highlight__item', 'el => el.focus()')
-            page.keyboard.press('Enter')
-            page.wait_for_timeout(600)
-            opened = page.evaluate(
-                "document.getElementById('master-highlight-modal').classList.contains('active-modal')")
-            page.keyboard.press('Escape')
-            page.wait_for_timeout(500)
-            closed = not page.evaluate(
-                "document.getElementById('master-highlight-modal').classList.contains('active-modal')")
-            cleared = page.evaluate(
-                "document.getElementById('master-modal-content').innerHTML.trim() === ''")
-            ok = opened and closed and cleared
-            record('PASS' if ok else 'FAIL', 'news modal opens by keyboard and closes',
-                   f'opened={opened} closed={closed} cleared={cleared}')
+            news = opened_pages.get('index.html')
+            if news and news.query_selector('.highlight__item'):
+                news.eval_on_selector('.highlight__item', 'el => el.focus()')
+                news.keyboard.press('Enter')
+                news.wait_for_timeout(600)
+                opened = news.evaluate(
+                    "document.getElementById('master-highlight-modal').classList.contains('active-modal')")
+                news.keyboard.press('Escape')
+                news.wait_for_timeout(500)
+                closed = not news.evaluate(
+                    "document.getElementById('master-highlight-modal').classList.contains('active-modal')")
+                cleared = news.evaluate(
+                    "document.getElementById('master-modal-content').innerHTML.trim() === ''")
+                ok = opened and closed and cleared
+                record('PASS' if ok else 'FAIL', 'news modal opens by keyboard and closes',
+                       f'opened={opened} closed={closed} cleared={cleared}')
+            else:
+                record('FAIL', 'news modal opens by keyboard and closes',
+                       'no .highlight__item on the front page')
 
             # every Traditional-tab row must be clickable without throwing
-            before = len(errors)
-            page.click('.publications__subset[data-target="#traditional"]')
-            page.wait_for_timeout(400)
-            rows = page.query_selector_all('#traditional .publications__content')
-            for row in rows[:3]:
-                row.click()
-                page.wait_for_timeout(150)
-            record('FAIL' if len(errors) > before else 'PASS',
-                   'Traditional publication rows do not throw',
-                   f'{len(errors) - before} new errors from {len(rows)} rows'
-                   if len(errors) > before else f'{len(rows)} rows clean')
+            pubs = opened_pages.get('publications/index.html')
+            if pubs:
+                pub_errors = all_errors['/publications/']
+                before = len(pub_errors)
+                pubs.click('.publications__subset[data-target="#traditional"]')
+                pubs.wait_for_timeout(400)
+                rows = pubs.query_selector_all('#traditional .publications__content')
+                for row in rows[:3]:
+                    row.click()
+                    pubs.wait_for_timeout(150)
+                record('FAIL' if len(pub_errors) > before else 'PASS',
+                       'Traditional publication rows do not throw',
+                       f'{len(pub_errors) - before} new errors from {len(rows)} rows'
+                       if len(pub_errors) > before else f'{len(rows)} rows clean')
+            else:
+                record('FAIL', 'Traditional publication rows do not throw',
+                       'publications page not found')
+
+            for p in opened_pages.values():
+                p.close()
 
             if shots_dir:
                 os.makedirs(shots_dir, exist_ok=True)
-                page.close()
                 names = []
-                for theme in ('light', 'dark'):
-                    for w, h, tag in ((390, 844, 'mobile'), (768, 1024, 'tablet'), (1280, 900, 'desktop')):
-                        p = browser.new_page(viewport={'width': w, 'height': h}, color_scheme=theme)
-                        p.goto(base, wait_until='load')
-                        p.wait_for_timeout(2400)
-                        name = f'{theme}-{tag}.png'
-                        p.screenshot(path=os.path.join(shots_dir, name), full_page=True)
-                        names.append(name)
-                        p.close()
+                for src, url_path in PAGE_URLS.items():
+                    tag_page = url_path.strip('/').replace('/', '-') or 'home'
+                    for theme in ('light', 'dark'):
+                        for w, h, tag in ((390, 844, 'mobile'), (1280, 900, 'desktop')):
+                            p = browser.new_page(viewport={'width': w, 'height': h},
+                                                 color_scheme=theme)
+                            p.goto(base.rstrip('/') + url_path,
+                                   wait_until='domcontentloaded')
+                            # Walk the page first: loading="lazy" images below the fold
+                            # are never requested otherwise, and a full-page screenshot
+                            # does not itself trigger them — the cards came out blank.
+                            p.evaluate("""async () => {
+                                for (let y = 0; y < document.body.scrollHeight; y += 600) {
+                                    window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60));
+                                }
+                                window.scrollTo(0, 0);
+                            }""")
+                            try:
+                                p.wait_for_function(
+                                    'Array.from(document.images).every(i => i.complete)',
+                                    timeout=20000)
+                            except Exception:
+                                pass  # screenshot it as-is rather than failing the run
+                            p.wait_for_timeout(1200)
+                            name = f'{tag_page}-{theme}-{tag}.png'
+                            p.screenshot(path=os.path.join(shots_dir, name), full_page=True)
+                            names.append(name)
+                            p.close()
                 record('PASS', 'screenshots saved',
                        f'{len(names)} in {os.path.relpath(shots_dir, REPO)}/')
             browser.close()
@@ -592,7 +769,7 @@ def main():
     for fn in (check_charset_first, check_references_resolve, check_manifest,
                check_external_links, check_empty_hrefs, check_alt_and_titles,
                check_duplicate_ids, check_single_h1, check_nav_active_state,
-               check_modal_pairing, check_sections_have_nav_links,
+               check_modal_pairing, check_internal_anchors,
                check_html_validity, check_bare_ampersands, check_css_sanity,
                check_seo_head, check_lazy_loading, check_unreferenced_assets,
                check_large_assets, check_ds_store_untracked):

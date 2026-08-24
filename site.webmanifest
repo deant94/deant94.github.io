@@ -1,7 +1,7 @@
 {
-  "name": "Dr Dean Thomas FHEA",
-  "short_name": "Dean Thomas",
-  "description": "Research Fellow in Digital Chemistry at the University of Glasgow.",
+  "name": "Thomas Lab",
+  "short_name": "Thomas Lab",
+  "description": "Digital chemistry research at the University of Glasgow — automated synthesis, chemputation and molecular machines.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

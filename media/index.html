@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- charset must come first so the parser never has to restart -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Media | Thomas Lab</title>
+        <meta name="description" content="Talks, videos and animations from the Thomas Lab on automated chemistry, chemputation and molecular machines.">
+        <meta name="author" content="Dean Thomas">
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="https://thomaslab.eu/media/">
+
+        <!--==================== BROWSER UI COLOUR ====================-->
+        <meta name="theme-color" content="#fbfbfe" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#191627" media="(prefers-color-scheme: dark)">
+
+        <!--==================== SOCIAL SHARING (Open Graph) ====================-->
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Thomas Lab">
+        <meta property="og:title" content="Media | Thomas Lab">
+        <meta property="og:description" content="Talks, videos and animations from the Thomas Lab on automated chemistry, chemputation and molecular machines.">
+        <meta property="og:url" content="https://thomaslab.eu/media/">
+        <meta property="og:locale" content="en_GB">
+        <meta property="og:image" content="https://thomaslab.eu/assets/img/dwt_uog.jpg">
+        <meta property="og:image:width" content="1280">
+        <meta property="og:image:height" content="720">
+        <meta property="og:image:alt" content="Dean Thomas in the laboratory alongside an automated synthesis platform">
+
+        <!--==================== SOCIAL SHARING (X / Twitter) ====================-->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@deant94">
+        <meta name="twitter:creator" content="@deant94">
+        <meta name="twitter:title" content="Media | Thomas Lab">
+        <meta name="twitter:description" content="Talks, videos and animations from the Thomas Lab on automated chemistry, chemputation and molecular machines.">
+        <meta name="twitter:image" content="https://thomaslab.eu/assets/img/dwt_uog.jpg">
+        <meta name="twitter:image:alt" content="Dean Thomas in the laboratory alongside an automated synthesis platform">
+
+        <!--==================== ICONS &amp; MANIFEST ====================-->
+        <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+        <link rel="manifest" href="/site.webmanifest">
+
+        <!--==================== THIRD-PARTY ORIGINS ====================-->
+        <!-- Open the connections early so the icon font and web font do not wait on DNS/TLS -->
+        <link rel="preconnect" href="https://unicons.iconscout.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+        <!--==================== FONT ====================-->
+        <!-- Linked here rather than @import-ed from styles.css, which forced the browser
+             to finish downloading the stylesheet before it could even request the font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap">
+
+        <!--==================== UNICONS ====================-->
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+        <!--==================== SWIPER CSS ====================-->
+        <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+
+        <!--==================== CSS ====================-->
+        <link rel="stylesheet" href="/assets/css/styles.css">
+
+        <!--==================== THEME BOOTSTRAP ====================-->
+        <!-- Applied before first paint so a returning dark-theme visitor, or one whose
+             system prefers dark, never sees a flash of the light theme. -->
+        <script>
+            (function () {
+                try {
+                    var stored = localStorage.getItem('selected-theme');
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (stored === 'dark' || (!stored && prefersDark)) {
+                        document.documentElement.classList.add('dark-theme-preload');
+                    }
+                } catch (e) { /* private mode can block localStorage; light theme is a fine fallback */ }
+            })();
+        </script>
+
+        <!--==================== STRUCTURED DATA ====================-->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ResearchOrganization",
+            "name": "Thomas Lab",
+            "url": "https://thomaslab.eu/",
+            "description": "Digital chemistry research group at the University of Glasgow, automating chemical synthesis and molecular machines with the Chemputer robotic platform.",
+            "image": "https://thomaslab.eu/assets/img/dwt_uog.jpg",
+            "email": "mailto:dean.thomas@glasgow.ac.uk",
+            "parentOrganization": { "@type": "CollegeOrUniversity", "name": "University of Glasgow", "url": "https://www.gla.ac.uk/" },
+            "founder": {
+                "@type": "Person",
+                "name": "Dean Thomas",
+                "honorificPrefix": "Dr",
+                "honorificSuffix": "FHEA",
+                "jobTitle": "Research Fellow in Digital Chemistry",
+                "url": "https://thomaslab.eu/about/"
+            },
+            "knowsAbout": [
+                "Digital Chemistry",
+                "Automated Synthesis",
+                "Chemputation",
+                "Artificial Molecular Machines",
+                "Supramolecular Chemistry",
+                "Organic Chemistry",
+                "Self-Driving Laboratories"
+            ]
+        }
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TFVT4LJVXE"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-TFVT4LJVXE');
+        </script>
+    </head>
+    <body>
+        <!-- Skip straight to the content, past the navigation -->
+        <a href="#main" class="skip-link">Skip to main content</a>
+        <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container" aria-label="Main navigation">
+                <a href="/" class="nav__logo" aria-label="Thomas Lab — home"></a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list grid">
+                        <li class="nav__item">
+                            <a href="/" class="nav__link">
+                                <i aria-hidden="true" class="uil uil-estate nav__icon"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/#news" class="nav__link">
+                                <i aria-hidden="true" class="uil uil-newspaper nav__icon"></i> News
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/about/" class="nav__link">
+                                <i aria-hidden="true" class="uil uil-user nav__icon"></i> About Dean
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/publications/" class="nav__link">
+                                <i aria-hidden="true" class="uil uil-file nav__icon"></i> Publications
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/media/" class="nav__link active-link" aria-current="page">
+                                <i aria-hidden="true" class="uil uil-film nav__icon"></i> Media
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/contact/" class="nav__link">
+                                <i aria-hidden="true" class="uil uil-message nav__icon"></i> Contact
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Icon elements, so they need an explicit button role, an accessible
+                         name and a tab stop; main.js binds Enter/Space to them. -->
+                    <i class="uil uil-times-circle nav__close" id="nav-close" role="button" tabindex="0" aria-label="Close menu"></i>
+                </div>
+
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class="uil uil-moon change-theme" id="theme-button" role="button" tabindex="0" aria-label="Switch to dark theme" aria-pressed="false"></i>
+
+                    <div class="nav__toggle" id="nav-toggle" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                        <i class="uil uil-bars" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Purely decorative reading-position indicator -->
+            <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+        </header>
+
+        <!--==================== MAIN ====================-->
+        <!-- tabindex="-1" so the skip link and the scroll-top control can move focus here -->
+        <main class="main" id="main" tabindex="-1">
+            <!--==================== Media ====================-->
+            <section class="highlight section" id="media">
+                <h1 class="section__title">Media</h1>
+                <span class="section__subtitle">Videos &amp; Animations</span>
+
+                <div class="highlight__container container swiper-container">
+                    <div class="swiper-wrapper"> 
+
+                        <!--==================== Media 12 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="Dean Thomas talks a national resource for automating chemical research" src="https://www.youtube.com/embed/bleG6JaSTXw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">Dean Thomas talks a national resource for automating chemical research</h3>
+                                <p class="highlight__description">Closing a four month programme of mentorship, design sprints, and field exploration, Dean pitched CATALYSE at Renaissance Philanthropy's Big if True Science Accelerator Demo Day, powered by ARIA. The proposal is for a multi million pound national platform that would give researchers across the UK shared access to automated, self driving chemistry.</p>
+                                <a href="https://www.youtube.com/watch?v=bleG6JaSTXw&amp;list=PLHhSkyvBcM6A4j-juXLyBdDzmwAaOw3k5&amp;index=9" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--==================== Media 11 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="Big if True Science (BiTS) Accelerator UK Cohort" src="https://www.youtube.com/embed/5LHRQAkjp0w" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">Big if True Science (BiTS) Accelerator UK Cohort</h3>
+                                <p class="highlight__description">An overview of the inaugural UK cohort of Renaissance Philanthropy's Big if True Science Accelerator, powered by ARIA. Over four months, twelve bold ideas, Dean's among them, were shaped into actionable eight figure R&amp;D programmes and pitched to major funders on Demo Day.</p>
+                                <a href="https://www.youtube.com/watch?v=5LHRQAkjp0w&amp;list=PLHhSkyvBcM6A4j-juXLyBdDzmwAaOw3k5&amp;index=1" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--==================== Media 10 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="Foresight Institute Talk | Machines Making Machines" src="https://www.youtube.com/embed/QOmlIIR7ok8?si=_fOVnln56gunhfFv" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">Foresight Institute Talk | Machines Making Machines</h3>
+                                <p class="highlight__description">Dean gave a talk to the Foresight Institute, highlighting the Cronin Group's recent progress in chemical automation and molecular nanotechnology. The presentation focussed on the Chemputer platform—a universal robotic system for the autonomous synthesis of molecular machines—supporting the broader vision of programmable matter and scalable molecular manufacturing.</p>
+                                <a href="https://www.youtube.com/watch?v=QOmlIIR7ok8" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!--==================== Media 9 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="The Cronin Group: Collaborating to push the boundaries of digital chemistry" src="https://www.youtube.com/embed/xAt3PUJclLk?si=tMWiXG1Ns93yY461" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">The Cronin Group: Collaborating to push the boundaries of digital chemistry</h3>
+                                <p class="highlight__description">With over 60 members, the Cronin Group at the University of Glasgow, brings together chemists, physicists, mathematicians and engineers to advance digital chemistry and programmable matter. Applications range from developing materials for solar fuel devices to producing potential drug and drug delivery candidates.</p>
+                                <a href="https://www.youtube.com/watch?v=xAt3PUJclLk" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!--==================== Media 8 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="Chemify x Cronin Group @ c&amp;en" src="https://www.youtube.com/embed/hMZHJwwMnAE" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">Chemify x Cronin Group @ c&amp;en</h3>
+                                <p class="highlight__description">AI can deliver huge benefits to chemistry, but some also worry about the turbulence it might bring to the job market. c&amp;en visited Chemify and the Cronin group to discuss whether Artificial intelligence is the great job maker or taker?</p>
+                                <a href="https://cen.acs.org/business/informatics/Artificial-intelligence-great-job-maker/103/i3" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Read more
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!--==================== Media 7 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="A Programmable Modular Robot for the Synthesis of Molecular Machines" src="https://www.youtube.com/embed/3M50xDSSQZY?si=cbqH17qySwN1Sugh" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">A Programmable Modular Robot for the Synthesis of Molecular Machines</h3>
+                                <p class="highlight__description">The precise assembly of molecular machines can revolutionise nanotechnology by creating structures with unmatched complexity and functionality. Our research utilises the Chemputer, a universal chemical robotic system with on-line NMR and liquid chromatography, to synthesize and purify diverse structures whilst standardising complex syntheses, enhancing reliability and scalability. By addressing these challenges in automated synthesis, the Chemputer makes advanced molecular architectures more accessible, potentially transforming manufacturing with innovative materials and devices. Animation created by @SciCommStudios
+                                </p>
+                                <a href="https://youtu.be/3M50xDSSQZY?si=vSWp4G8uBvzzuHjb" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--==================== Media 6 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="Spotlight on Research | Dean Thomas | Digital Chemistry" src="https://www.youtube.com/embed/8M7E_rRP3FU?si=MGGB150GuFfCdQTq" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">Spotlight on Research | Dean Thomas | Digital Chemistry</h3>
+                                <p class="highlight__description">Dean specialises in making chemistry safer and more efficient by using automated robotics and artificial intelligence. From his background as an organic chemist, he now uses this knowledge to help him engineer advanced digital chemistry technologies. The ‘Spotlight on Research’ series focuses on world-changing researchers and their fantastic work at the University of Glasgow. The series showcases how researchers at different stages in their career contribute to the University’s mission to transform lives through ideas and action.</p>
+                                <a href="https://www.youtube.com/watch?v=8M7E_rRP3FU" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--==================== Media 5 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="ARC In 60" src="https://www.youtube.com/embed/dNhY1NNC6Q4?si=kgtD07Q2HrTQjSX0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">ARC In 60                                </h3>
+                                <p class="highlight__description">The Advanced Research Centre is home to cross-cutting, interdisciplinary research and impactful public engagement. Dean had the opportunity to represent the Cronin Group's contribution to what the ARC has achieved so far.                                </p>
+                                <a href="https://youtu.be/dNhY1NNC6Q4" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--==================== Media 4 ====================-->
+
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="Foresight Institute Molecular Machines Panel" src="https://www.youtube.com/embed/3RKvcmN3fRo?si=Ga5Rc3eX-f47DQsI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">Foresight Institute Molecular Machines Panel</h3>
+                                <p class="highlight__description">Dean joined the "Molecular Machines Panel" at Foresight's Vision Weekend 2023 in France alongside Alexis Courbet, Erik Benson, and Stephane Redon. This engaging discussion, hosted by Allison Duettmann, explores advancements in molecular machines, computing, and atomically precise manufacturing for a flourishing long-term future.</p>
+                                <a href="https://www.youtube.com/watch?v=3RKvcmN3fRo" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!--==================== Media 3 ====================-->
+                        
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="Research Highlighted on BBC Click" src="https://www.youtube.com/embed/C3FUyYwwEDs?si=GqGZIa-WUusjDlhn" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">Research Highlighted on BBC Click</h3>
+                                <p class="highlight__description">Technology from the Cronin Group has been featured on BBC Click. In the programme, Prof. Cronin describes how new Chemputer technology will allow for the automation of manual, repetitive tasks, leaving the chemist free to focus on the creative and inventive aspects of chemistry.</p>
+                                <a href="https://www.youtube.com/watch?v=C3FUyYwwEDs" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--==================== Media 2 ====================-->
+                        
+                        <div class="highlight__content grid swiper-slide">
+                            <div class="highlight__video">
+                                <div class="responsive-iframe">
+                                    <iframe loading="lazy" title="Pumping Between Phases With a Pulsed-Fuel Molecular Ratchet" src="https://www.youtube.com/embed/xHx5x7TZ6Qg?si=Wz120Rg8Te2-xujT" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title">Pumping Between Phases With a Pulsed-Fuel Molecular Ratchet</h3>
+                                    <p class="highlight__description">Here we report on molecular pumps immobilised on polymer beads that use an energy ratchet mechanism to directionally transport substrates from solution onto the beads. The polymer-bound substrates can be released back to the bulk either one compartment at a time or all at once. Non-equilibrium sorption by immobilised artificial molecular machines enables the transduction of energy from chemical fuels for the storage and release of energy and information. Animation created by @SciCommStudios
+                                    </p>
+                                <a href="https://www.youtube.com/watch?v=xHx5x7TZ6Qg" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    Watch on YouTube
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div>  
+
+                        <!--==================== Media 1 ====================-->
+                        
+                        <!-- <div class="highlight__content grid swiper-slide">
+                            <img width="826" height="1102" loading="lazy" decoding="async" src="/assets/img/acie_cover.jpg" alt="" class="highlight__img">
+
+                            <div class="highlight__data">
+                                <h3 class="highlight__title"> Dissipative Catalysis with a Molecular Machine </h3>
+                                    <p class="highlight__description">Leigh and co-workers report a rotaxane which is transiently converted from its resting state into a catalytically active form upon consumption of a chemical fuel, thereby allowing temporal control of a coupled chemical reaction.
+                                    </p>
+                                <a href="https://onlinelibrary.wiley.com/doi/10.1002/anie.201907113" target='_blank' rel="noopener noreferrer" class="button button--flex button--small highlight__button">
+                                    More
+                                    <i aria-hidden="true" class="uil uil-arrow-right button__icon "></i>
+                                </a>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="swiper-button-next">
+                        <i aria-hidden="true" class="uil uil-angle-right-b swiper-highlight-icon"></i>
+                    </div>
+                    <div class="swiper-button-prev">
+                        <i aria-hidden="true" class="uil uil-angle-left-b swiper-highlight-icon"></i>
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+                </div>
+            </section>
+        </main>
+
+        <!--==================== FOOTER ====================-->
+        <footer class="footer">
+            <div class="footer__bg">
+                <div class="footer__container container grid">
+                    <div>
+                        <p class="footer__title">Thomas Lab</p>
+                        <span class="footer__subtitle">Digital Chemistry — University of Glasgow</span>
+                    </div>
+
+                    <ul class="footer__links">
+                        <li>
+                            <a href="/#news" class="footer__link">News</a>
+                        </li>
+                        <li>
+                            <a href="/about/" class="footer__link">About Dean</a>
+                        </li>
+                        <li>
+                            <a href="/about/#history" class="footer__link">History</a>
+                        </li>
+                        <li>
+                            <a href="/publications/" class="footer__link">Publications</a>
+                        </li>
+                        <li>
+                            <a href="/media/" class="footer__link">Media</a>
+                        </li>
+                        <li>
+                            <a href="/contact/" class="footer__link">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="footer__socials">
+
+                        <a href="mailto:dean.thomas@glasgow.ac.uk" class="footer__social" aria-label="Email Dean Thomas">
+                            <i aria-hidden="true" class="uil uil-envelope-alt"></i>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/deant94/" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Dean Thomas on LinkedIn">
+                            <i aria-hidden="true" class="uil uil-linkedin"></i>
+                        </a>
+
+                        <a href="https://x.com/deant94" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Dean Thomas on X">
+                            <i aria-hidden="true" class="uil uil-twitter-alt"></i>
+                        </a>
+
+                        <a href="https://bsky.app/profile/deant94.bsky.social" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Dean Thomas on Bluesky">
+                            <i aria-hidden="true" class="uil uil-twitter"></i>
+                        </a>
+
+                        <a href="https://scholar.google.com/citations?user=eXDA9oYAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Dean Thomas on Google Scholar">
+                            <i aria-hidden="true" class="uil uil-graduation-cap"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+        <!--==================== SCROLL TOP ====================-->
+        <a href="#main" class="scrollup" id="scroll-up" aria-label="Back to top">
+            <i aria-hidden="true" class="uil uil-arrow-up scrollup__icon"></i>
+        </a>
+
+        <!--==================== SWIPER JS ====================-->
+        <script src="/assets/js/swiper-bundle.min.js"></script>
+
+        <!--==================== MAIN JS ====================-->
+        <script src="/assets/js/main.js"></script>
+    </body>
+</html>
