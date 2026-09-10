@@ -554,7 +554,7 @@ p.section__subtitle{
 }
 
 /* ===== GRID LAYOUT ===== */
-.highlight__grid-3x3 {
+.highlight__grid-3x2 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -1252,7 +1252,7 @@ html.dark-theme-preload .tag--organic-chemistry {
     width: 450px;
     /* height: auto; */
   }
-  .highlight__grid-3x3 {
+  .highlight__grid-3x2 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -1374,7 +1374,7 @@ html.dark-theme-preload .tag--organic-chemistry {
   .about__researchinterestimg {
     width: 550px;
   }
-  .highlight__grid-3x3 {
+  .highlight__grid-3x2 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
