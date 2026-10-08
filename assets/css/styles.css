@@ -762,12 +762,20 @@ p.section__subtitle{
 }
 
 /*==================== publications ====================*/
+/* Two rows of tabs: the view (All / Traditional), then the category within it */
 .publications__tabs{
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: var(--mb-1);
+}
+.publications__categories{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   margin-bottom: var(--mb-2-5);
 }
-.publications__subset{
+.publications__subset,
+.publications__category{
   display:flex;
   flex-direction: row;
   justify-content: center;
@@ -782,11 +790,35 @@ p.section__subtitle{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, transform 0.3s;
 }
-.publications__subset:hover {
+.publications__subset:hover,
+.publications__category:hover {
   box-shadow: 0 8px 16px rgba(0,0,0,.15);
   transform: translateY(-2px);
   color: var(--first-color);
-} 
+}
+
+/* A step down from the view tabs above, so the two rows read as a hierarchy */
+.publications__category{
+  font-size: var(--normal-font-size);
+  padding: .35rem 1rem;
+}
+
+/* A category the open view has nothing in (Traditional lists research only).
+   The extra class in the selector outranks the dark-theme resting shadow below;
+   the dark-theme hover rule excludes disabled tabs itself. */
+.publications__categories .publications__category[aria-disabled="true"]{
+  opacity: .4;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  color: inherit;
+}
+
+/* Only the selected category's group shows, in whichever view is open */
+.publications__group:not(.publications__active){
+  display: none;
+}
+
 .publications [data-content]{
   display: none;
 }
@@ -798,7 +830,8 @@ p.section__subtitle{
 /* The tab elements carry .publications__subset, so the old
    .publications__button.publications__active rule never matched and the selected
    Publications tab was not highlighted the way the History tabs are. */
-.publications__subset.publications__active{
+.publications__subset.publications__active,
+.publications__category.publications__active{
   color: var(--first-color);
 }
 
@@ -842,12 +875,7 @@ p.section__subtitle{
   max-height: none;
 }
 
-/* Space between the Research / Acknowledgements / Outreach groups */
-#all > .section__subtitle:not(:first-child){
-  margin-top: 6rem;
-}
-
-#traditional > .publications__content{
+#traditional .publications__content{
   margin-bottom: 1.5rem;
 }
 
@@ -1305,7 +1333,11 @@ html.dark-theme-preload .tag--organic-chemistry {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
-    gap: 0.5rem; 
+    gap: 0.5rem;
+  }
+  .publications__categories {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
   }
   .publications__content{
     align-items: center;
@@ -1424,6 +1456,7 @@ html.dark-theme-preload .tag--organic-chemistry {
 body.dark-theme .highlight__item:hover,
 body.dark-theme .history__button:hover,
 body.dark-theme .publications__subset:hover,
+body.dark-theme .publications__category:not([aria-disabled="true"]):hover,
 body.dark-theme .publications__content:hover,
 body.dark-theme .about__researchinterestimg:hover{
   box-shadow: 0 8px 16px rgba(0,0,0,.5);
@@ -1432,6 +1465,7 @@ body.dark-theme .about__researchinterestimg:hover{
 body.dark-theme .highlight__item,
 body.dark-theme .history__button,
 body.dark-theme .publications__subset,
+body.dark-theme .publications__category,
 body.dark-theme .publications__content,
 body.dark-theme .about__researchinterestimg{
   box-shadow: 0 2px 4px rgba(0,0,0,.4);
@@ -1461,6 +1495,7 @@ body.dark-theme .scroll-header{
   .highlight__item:hover,
   .history__button:hover,
   .publications__subset:hover,
+  .publications__category:hover,
   .about__researchinterestimg:hover,
   .highlight__button:hover .button__icon{
     transform: none;

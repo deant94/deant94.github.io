@@ -52,16 +52,21 @@ enableKeyboardActivation(navToggle)
 enableKeyboardActivation(navClose)
 
 /*==================== GENERIC TABS FUNCTION ====================*/
-function setupTabs(buttonSelector, contentSelector, activeClass) {
-    const tabs = document.querySelectorAll(buttonSelector);
-    const contents = document.querySelectorAll(contentSelector);
+/* A tab's data-target is a selector matched against the content elements, so one tab
+   can show several of them. Tabs marked aria-disabled="true" are skipped, by click and
+   by arrow key. onChange runs after a tab is selected. Returns the select function. */
+function setupTabs(buttonSelector, contentSelector, activeClass, onChange) {
+    const tabs = Array.from(document.querySelectorAll(buttonSelector));
+    const contents = Array.from(document.querySelectorAll(contentSelector));
+    const isDisabled = (tab) => tab.getAttribute('aria-disabled') === 'true';
 
     const activate = (tab) => {
-        const target = document.querySelector(tab.dataset.target);
-        if (!target) return;
+        if (isDisabled(tab)) return;
+        const targets = contents.filter(c => c.matches(tab.dataset.target));
+        if (!targets.length) return;
 
         contents.forEach(c => c.classList.remove(activeClass));
-        target.classList.add(activeClass);
+        targets.forEach(t => t.classList.add(activeClass));
 
         tabs.forEach(t => {
             t.classList.remove(activeClass);
@@ -71,39 +76,72 @@ function setupTabs(buttonSelector, contentSelector, activeClass) {
         tab.classList.add(activeClass);
         tab.setAttribute('aria-selected', 'true');
         tab.setAttribute('tabindex', '0');
+
+        if (onChange) onChange(tab);
     };
 
-    tabs.forEach((tab, index) =>{
+    tabs.forEach((tab) =>{
         tab.addEventListener('click', () => activate(tab));
 
         // Roving-tabindex keyboard support expected of a tablist
         tab.addEventListener('keydown', (event) => {
-            let nextIndex = null;
+            const enabled = tabs.filter(t => !isDisabled(t));
+            const index = enabled.indexOf(tab);
+            let next = null;
 
-            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % tabs.length;
-            else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + tabs.length) % tabs.length;
-            else if (event.key === 'Home') nextIndex = 0;
-            else if (event.key === 'End') nextIndex = tabs.length - 1;
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = enabled[(index + 1) % enabled.length];
+            else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = enabled[(index - 1 + enabled.length) % enabled.length];
+            else if (event.key === 'Home') next = enabled[0];
+            else if (event.key === 'End') next = enabled[enabled.length - 1];
             else if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar'){
                 event.preventDefault();
                 activate(tab);
                 return;
             }
 
-            if (nextIndex !== null){
+            if (next){
                 event.preventDefault();
-                activate(tabs[nextIndex]);
-                tabs[nextIndex].focus();
+                activate(next);
+                next.focus();
             }
         });
     });
+
+    return activate;
 }
 
 // History tabs
 setupTabs('.history__button[data-target]', '.history__content[data-content]', 'history__active');
 
-// Publications tabs
-setupTabs('.publications__subset[data-target]', '.publications__content[data-content]', 'publications__active');
+/*==================== PUBLICATIONS TABS ====================*/
+/* Two tablists: the view (All / Traditional) and the category within it (Research /
+   Outreach / Acknowledgements). A category tab shows that category's group in every
+   view, and is disabled while the open view has no such group — Traditional lists
+   research only. If a view change disables the selected category, the first one still
+   available is selected instead. */
+const categoryTabs = Array.from(document.querySelectorAll('.publications__category[data-target]'));
+const selectCategory = setupTabs('.publications__category[data-target]', '.publications__group', 'publications__active');
+
+function syncCategoriesToView(viewTab) {
+    const view = document.querySelector(viewTab.dataset.target);
+    if (!view) return;
+
+    categoryTabs.forEach(tab => {
+        tab.setAttribute('aria-disabled', String(!view.querySelector(tab.dataset.target)));
+    });
+
+    const selected = categoryTabs.find(tab => tab.classList.contains('publications__active'));
+    if (selected && selected.getAttribute('aria-disabled') === 'true') {
+        const fallback = categoryTabs.find(tab => tab.getAttribute('aria-disabled') !== 'true');
+        if (fallback) selectCategory(fallback);
+    }
+}
+
+setupTabs('.publications__subset[data-target]', '.publications__content[data-content]', 'publications__active',
+    syncCategoriesToView);
+
+const initialView = document.querySelector('.publications__subset.publications__active[data-target]');
+if (initialView) syncCategoriesToView(initialView);
 
 
 /*==================== PUBLICATIONS MODAL ====================*/
