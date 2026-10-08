@@ -26,7 +26,6 @@ import json
 import os
 import re
 import socket
-import socketserver
 import sys
 import threading
 
@@ -427,8 +426,10 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
 
 def serve(port):
     handler = functools.partial(QuietHandler, directory=REPO)
-    socketserver.TCPServer.allow_reuse_address = True
-    httpd = socketserver.TCPServer(('127.0.0.1', port), handler)
+    # Threaded: the browser fetches several images at once, and a single-threaded
+    # server drops some of those connections, which surfaced as random files failing
+    # the "no failed requests" and "images decode" checks.
+    httpd = http.server.ThreadingHTTPServer(('127.0.0.1', port), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     return httpd
 

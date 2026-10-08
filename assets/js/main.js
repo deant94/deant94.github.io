@@ -219,12 +219,11 @@ window.addEventListener('popstate', () => {
 
 
 /*==================== HIGHLIGHTS SWIPER  ====================*/
-/* Swiper 6 returns one instance per matching element, so both the News and the
-   Media carousels are initialised by this single call. */
-let swiper = new Swiper('.highlight__container', {
+const highlightSwiperOptions = {
   cssMode: true,
   loop: true,
 
+  // Selector strings resolve to the arrows/dots inside each carousel's own container
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
@@ -233,13 +232,62 @@ let swiper = new Swiper('.highlight__container', {
     el: '.swiper-pagination',
     clickable: true,
   },
-});
+};
+
+/*===== NEWS: THREE CARDS PER SLIDE ON PHONES =====*/
+/* News slides are authored as grids of six cards. On phones that grid is a single
+   column, so a slide was six cards tall; there each slide is split into slides of
+   three. The authored slides and their cards are captured before Swiper runs, since
+   loop mode clones slides, and the split is redone when the viewport crosses the
+   breakpoint. */
+const newsContainer = document.querySelector('#news .highlight__container');
+const newsWrapper = newsContainer && newsContainer.querySelector('.swiper-wrapper');
+const newsSlides = newsWrapper ? Array.from(newsWrapper.children) : [];
+const newsSlideCards = newsSlides.map(slide => Array.from(slide.querySelectorAll('.highlight__item')));
+// The exact complement of the CSS breakpoint where the news grid gains a second column
+const phoneQuery = window.matchMedia('not all and (min-width: 568px)');
+
+function layoutNewsSlides(cardsPerSlide) {
+    const slides = [];
+    newsSlides.forEach((slide, i) => {
+        const cards = newsSlideCards[i];
+        for (let start = 0; start < cards.length; start += cardsPerSlide) {
+            // The first group goes back into the authored slide; any further groups get
+            // an empty copy of it, so the slide and grid classes stay as authored
+            const target = start === 0 ? slide : slide.cloneNode(false);
+            const grid = start === 0
+                ? slide.querySelector('.highlight__grid')
+                : target.appendChild(slide.querySelector('.highlight__grid').cloneNode(false));
+            grid.append(...cards.slice(start, start + cardsPerSlide));
+            slides.push(target);
+        }
+    });
+    newsWrapper.replaceChildren(...slides);
+}
+
+const newsCardsPerSlide = () => (phoneQuery.matches ? 3 : Infinity);
+
+if (newsWrapper) layoutNewsSlides(newsCardsPerSlide());
+
+// One instance per carousel (News and Media)
+document.querySelectorAll('.highlight__container')
+    .forEach(container => new Swiper(container, highlightSwiperOptions));
+
+const onPhoneBreakpoint = () => {
+    if (!newsWrapper) return;
+    // destroy() also removes loop mode's cloned slides before the cards are regrouped
+    newsContainer.swiper.destroy(true, true);
+    layoutNewsSlides(newsCardsPerSlide());
+    new Swiper(newsContainer, highlightSwiperOptions);
+};
+
+if (phoneQuery.addEventListener) phoneQuery.addEventListener('change', onPhoneBreakpoint);
+else if (phoneQuery.addListener) phoneQuery.addListener(onPhoneBreakpoint);
 
 /*==================== HIGHLIGHTS MODAL ====================*/
 
 const masterModal = document.getElementById('master-highlight-modal');
 const masterModalContent = document.getElementById('master-modal-content');
-const highlightItems = document.querySelectorAll('.highlight__item');
 
 // Remembers which card opened the modal so focus can be handed back
 let highlightTrigger = null;
@@ -299,17 +347,21 @@ let openHighlightModal = function(item) {
     }
 };
 
-highlightItems.forEach((item) => {
-    item.addEventListener('click', () => openHighlightModal(item));
+/* Delegated rather than bound per card: Swiper's loop mode clones slides (and clones
+   do not carry listeners), and the News cards are regrouped at the phone breakpoint. */
+document.addEventListener('click', (event) => {
+    const item = event.target.closest('.highlight__item');
+    if (item) openHighlightModal(item);
+});
 
-    // The cards are divs exposed as role="button", so Enter/Space must work too
-    item.addEventListener('keydown', (event) => {
-        if (event.target !== item) return;
-        if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar'){
-            event.preventDefault();
-            openHighlightModal(item);
-        }
-    });
+// The cards are divs exposed as role="button", so Enter/Space must work too
+document.addEventListener('keydown', (event) => {
+    const item = event.target;
+    if (!(item instanceof Element) || !item.matches('.highlight__item')) return;
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar'){
+        event.preventDefault();
+        openHighlightModal(item);
+    }
 });
 
 // Close on background click
@@ -421,16 +473,25 @@ onScroll()
 /*==================== DARK LIGHT THEME ====================*/
 
 const themeButton = document.getElementById('theme-button');
+const themeIcon = themeButton && themeButton.querySelector('use');
 const researchInterestImage = document.querySelector('.about__researchinterestimg');
 const darkTheme = 'dark-theme';
-const iconTheme = 'uil-sun';
 
 // SVG image files for light and dark themes
 const darkResearchInterestImageSrc = 'assets/img/researchinterestdark.svg';
 const lightResearchInterestImageSrc = 'assets/img/researchinterest.svg';
 
+/* Storage can throw when the browser blocks it (some private modes, blocked site
+   data). The theme still works then; the choice just is not remembered. */
+const storedTheme = () => {
+    try { return localStorage.getItem('selected-theme'); } catch (e) { return null; }
+};
+const storeTheme = (theme) => {
+    try { localStorage.setItem('selected-theme', theme); } catch (e) { /* not remembered */ }
+};
+
 // Check previously selected theme (if any)
-const selectedTheme = localStorage.getItem('selected-theme');
+const selectedTheme = storedTheme();
 
 // Get current theme
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
@@ -445,8 +506,7 @@ function applyTheme(theme) {
 
     if (themeButton) {
         // The button shows the icon for the theme it will switch *to*
-        themeButton.classList[isDark ? 'add' : 'remove'](iconTheme);
-        themeButton.classList[isDark ? 'remove' : 'add']('uil-moon');
+        if (themeIcon) themeIcon.setAttribute('href', isDark ? '#i-sun' : '#i-moon');
         themeButton.setAttribute('aria-pressed', String(isDark));
         themeButton.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
     }
@@ -472,7 +532,7 @@ applyTheme(selectedTheme || (prefersDark ? 'dark' : 'light'));
 if (window.matchMedia) {
     const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const onSchemeChange = (event) => {
-        if (!localStorage.getItem('selected-theme')) {
+        if (!storedTheme()) {
             applyTheme(event.matches ? 'dark' : 'light');
         }
     };
@@ -487,7 +547,7 @@ if (themeButton) {
         applyTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark');
 
         // Save the user's theme choice
-        localStorage.setItem('selected-theme', getCurrentTheme());
+        storeTheme(getCurrentTheme());
     });
 
     enableKeyboardActivation(themeButton);

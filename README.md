@@ -104,15 +104,28 @@ file is edited directly on github.com. Screenshots are uploaded as a build artif
 ## Editing notes
 
 - **Adding a news item:** copy an existing `.highlight__item` inside a
-  `.highlight__grid-3x3`. It needs an `<img>`, an `<h3>`, and a
+  `.highlight__grid-3x2`. It needs an `<img>`, an `<h3>`, and a
   `<template class="modal-template">`. `main.js` clones that template into the shared
   modal, so nothing else needs wiring. Keep `role="button"`, `tabindex="0"` and the
-  `aria-label` or the card stops being keyboard-reachable.
+  `aria-label` or the card stops being keyboard-reachable. Author slides of six; on
+  phones `main.js` splits each one into slides of three automatically.
+- **Card thumbnails are 16:9.** News thumbnails are cropped to fill that frame; if the
+  image is mostly text or logos and the crop would cut words off, give the card's
+  `<img>` `class="highlight__thumb--contain"` to fit it whole instead. Publication
+  thumbnails are always fitted whole. The modals show every image uncropped.
 - **Adding a publication:** the "All" tab card and the "Traditional" list entry are
   separate; add both. Every card in `#all` must contain exactly one
   `.publications__modal` or the index pairing breaks (`tools/check.py` will tell you).
-- **Images:** add `loading="lazy"`, `decoding="async"` and real `width`/`height`.
-  The dimensions prevent layout shift; CSS still controls the displayed size.
+- **Images:** save as WebP, at most 1600 px on the long edge — nothing on the page is
+  shown wider than about 720 px, so that is already sharp on high-density screens.
+  Posters opened full-screen are JPEG at 4000 px. Add `loading="lazy"`,
+  `decoding="async"` and the file's real `width`/`height`; the dimensions prevent
+  layout shift, and CSS still controls the displayed size. `dwt_uog.jpg` stays JPEG
+  because it is the social-sharing image, and link previews do not all accept WebP.
+- **Icons** are inline SVG, drawn from the sprite at the top of `<body>`:
+  `<svg class="icon" aria-hidden="true"><use href="#i-NAME"></use></svg>`. They size
+  to the surrounding `font-size` and take the text colour. To add one, copy the `<path>`
+  from the Unicons "line" SVG set into a new `<symbol id="i-NAME" viewBox="0 0 24 24">`.
 - **External links:** always `target="_blank" rel="noopener noreferrer"`.
 - **Theme:** `body.dark-theme` overrides the custom properties in `:root`. An inline
   script in `<head>` sets `html.dark-theme-preload` before first paint so returning
