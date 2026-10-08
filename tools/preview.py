@@ -19,7 +19,6 @@ Press Ctrl+C to stop.
 import functools
 import http.server
 import os
-import socketserver
 import sys
 import threading
 import webbrowser
@@ -52,9 +51,9 @@ def main():
     open_browser = '--no-open' not in sys.argv
 
     handler = functools.partial(Handler, directory=REPO)
-    socketserver.TCPServer.allow_reuse_address = True
     try:
-        httpd = socketserver.TCPServer(('127.0.0.1', port), handler)
+        # Threaded, so the browser's parallel image requests are not dropped
+        httpd = http.server.ThreadingHTTPServer(('127.0.0.1', port), handler)
     except OSError as exc:
         print(f'Could not bind port {port}: {exc}')
         print(f'Try a different one, e.g.  python tools/preview.py {port + 1}')
