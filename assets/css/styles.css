@@ -602,6 +602,12 @@ p.section__subtitle{
   gap: .75rem;
 }
 
+/* A little breathing room between a pop-up's text and its button(s) */
+.highlight__modal-content > .highlight__button,
+.highlight__modal-content > .highlight__modal-actions{
+  margin-top: var(--mb-1);
+}
+
 .highlight__modal-close {
   position: absolute;
   top: 1rem;
@@ -634,12 +640,6 @@ p.section__subtitle{
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.about__researchinterestimg:hover{
-  box-shadow: 0 8px 16px rgba(0,0,0,.15);
-  transform: translateY(-2px);
-  color: var(--first-color);
-}
-
 .about__description{
   text-align: justify;
   margin: 0 auto;
@@ -653,6 +653,7 @@ p.section__subtitle{
   font-size: var(--h2-font-size);
   font-weight: var(--font-semi-bold);
   color: var(--title-color);
+  font-variant-numeric: tabular-nums; /* digits keep their width while main.js rolls them up */
 }
 
 .about__info{
@@ -671,16 +672,50 @@ p.section__subtitle{
 /*==================== HISTORY ====================*/
 .history__tabs{
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
   margin-bottom: var(--mb-2-5);
 }
+
+/* Every tab label reads "X & Y". On phones the tabs stack and each label sits on one
+   line beside its icon; from 568px the two halves stack under the icon, so every tab
+   is the same three lines tall: three tabs to a row, then all five from 1024px. */
+.history__button{
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  white-space: nowrap;
+}
+
+.history__label > span{
+  display: inline;
+}
+
+@media screen and (min-width: 568px){
+  .history__button{
+    flex: 0 1 calc((100% - 1.5rem) / 3);
+    flex-direction: column;
+    gap: .25rem;
+  }
+  .history__label > span{
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .history__button{
+    flex-basis: calc((100% - 3rem) / 5);
+  }
+}
 .history__button {
-  display: block;
   text-align: center;
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
   cursor: pointer;
-  padding: 0.1rem 1rem;
+  padding: .6rem .75rem;
   border-radius: 0.5rem;
   background-color: var(--container-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -709,7 +744,7 @@ p.section__subtitle{
 
 .history__icon {
   font-size: 1.8rem;
-  margin-bottom: var(--mb-0-25); /* Changed to margin-bottom to stack vertically */
+  flex-shrink: 0;
 }
 
 .history__data{
@@ -877,6 +912,34 @@ p.section__subtitle{
 
 #traditional .publications__content{
   margin-bottom: 1.5rem;
+}
+
+/* The Traditional list reads as a numbered reference list: the number hangs in its
+   own column and the title and citation line up beside it, left aligned, so the
+   numbers can be followed straight down the page. */
+#traditional .publications__content{
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  column-gap: .5rem; /* overrides the wide card gap set at 1024px */
+  align-items: baseline;
+  text-align: left;
+}
+
+#traditional .publications__content > *{
+  grid-column: 2;
+}
+
+#traditional .publications__num{
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+  color: var(--title-color);
+}
+
+#traditional .publications__content > p.section__subtitle{
+  text-align: left;
+  margin-bottom: 0;
 }
 
 .publications__content:hover{
@@ -1192,12 +1255,6 @@ html.dark-theme-preload .tag--organic-chemistry {
 .history__data{
   gap: .5rem;
 }
-.history__tabs {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, auto);
-  gap: 1rem;
-}
 .home__img{
   justify-self: center;
 }
@@ -1222,11 +1279,6 @@ html.dark-theme-preload .tag--organic-chemistry {
   .home__img{
     order: 1;
     justify-self: center;
-  }
-  .history__tabs {
-    grid-template-columns: 1fr; /* Change to a single column */
-    grid-template-rows: repeat(4, auto); /* Set to 4 rows to stack items vertically */
-    gap: 0.5rem; /* Adjust gap for smaller spacing if desired */
   }
   .about__container,
   .publications__content,
@@ -1317,17 +1369,8 @@ html.dark-theme-preload .tag--organic-chemistry {
   .about__info{
     justify-content: space-between;
   }
-  .history__button{
-    margin: 0 var(--mb-1);
-  }
   .history__sections{
     grid-template-columns: .5fr;
-  }
-  .history__tabs {
-    justify-content: center;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    grid-template-rows: repeat(2, auto); /* Two rows */
-    gap: 1rem; /* Adjust spacing for larger screens */
   }
   .publications__tabs {
     display: grid;
@@ -1383,12 +1426,6 @@ html.dark-theme-preload .tag--organic-chemistry {
   }
   .publications__content{
     column-gap: 5rem;
-  }
-  .history__tabs {
-    display: grid; /* Enables grid layout */
-    grid-template-columns: repeat(4, 1fr); /* Four columns of equal width */
-    grid-template-rows: 1fr; /* Single row */
-    gap: 0.5rem; /* Spacing between columns */
   }
   .swiper-highlight-icon{
     font-size: 3.5rem;
@@ -1457,8 +1494,7 @@ body.dark-theme .highlight__item:hover,
 body.dark-theme .history__button:hover,
 body.dark-theme .publications__subset:hover,
 body.dark-theme .publications__category:not([aria-disabled="true"]):hover,
-body.dark-theme .publications__content:hover,
-body.dark-theme .about__researchinterestimg:hover{
+body.dark-theme .publications__content:hover{
   box-shadow: 0 8px 16px rgba(0,0,0,.5);
 }
 
@@ -1496,7 +1532,6 @@ body.dark-theme .scroll-header{
   .history__button:hover,
   .publications__subset:hover,
   .publications__category:hover,
-  .about__researchinterestimg:hover,
   .highlight__button:hover .button__icon{
     transform: none;
   }

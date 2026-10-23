@@ -590,3 +590,73 @@ if (themeButton) {
 
     enableKeyboardActivation(themeButton);
 }
+
+/*==================== About stats ====================*/
+/* The About figures are derived rather than typed in, so they stay true as the site
+   grows: years from a start date, labs from the data-lab tags in the Experience
+   timeline, and papers from the numbered Traditional list on the publications page.
+   Each figure rolls up from zero the first time it scrolls into view. The markup
+   keeps a sensible fallback for when scripts or the fetch are unavailable. */
+const statCounters = document.querySelectorAll('[data-count-since], [data-count-labs], [data-count-papers]');
+
+const yearsSince = (iso) => {
+    const start = new Date(iso);
+    const now = new Date();
+    let years = now.getFullYear() - start.getFullYear();
+    if (now < new Date(now.getFullYear(), start.getMonth(), start.getDate())) years--;
+    return years;
+};
+
+// The list may be on this page, or on another page that is fetched and parsed
+// Work still in submission is listed but not yet counted
+const PAPER_ROWS = '#traditional .publications__content:not([data-status="in-submission"]) > .publications__num';
+const countPapers = (url) => (url
+    ? fetch(url)
+        .then(response => (response.ok ? response.text() : Promise.reject(response.status)))
+        .then(text => new DOMParser().parseFromString(text, 'text/html'))
+    : Promise.resolve(document))
+    .then(doc => doc.querySelectorAll(PAPER_ROWS).length || Promise.reject('none'));
+
+const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function rollTo(el, target, suffix) {
+    if (reduceMotion) {
+        el.textContent = target + suffix;
+        return;
+    }
+    const duration = 1200;
+    const start = performance.now();
+    const step = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic: quick start, gentle landing
+        el.textContent = Math.round(eased * target) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+}
+
+statCounters.forEach(el => {
+    let value;
+    if (el.dataset.countSince) {
+        value = Promise.resolve({ n: yearsSince(el.dataset.countSince), suffix: '' });
+    } else if (el.dataset.countLabs) {
+        const labs = document.querySelectorAll(`${el.dataset.countLabs} [data-lab]`);
+        value = Promise.resolve({ n: new Set(Array.from(labs, lab => lab.dataset.lab)).size, suffix: '' });
+    } else {
+        value = countPapers(el.dataset.countPapers).then(n => ({ n, suffix: '+' }));
+    }
+
+    value.then(({ n, suffix }) => {
+        if (!n) return;
+        if (!('IntersectionObserver' in window)) {
+            el.textContent = n + suffix;
+            return;
+        }
+        const observer = new IntersectionObserver(entries => {
+            if (!entries.some(entry => entry.isIntersecting)) return;
+            observer.disconnect();
+            rollTo(el, n, suffix);
+        }, { threshold: 0.6 });
+        observer.observe(el);
+    }).catch(() => { /* keep the fallback text */ });
+});
