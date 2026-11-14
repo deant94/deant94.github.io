@@ -414,17 +414,17 @@ p.section__subtitle{
 
 /*==================== HIGHLIGHT ====================*/
 
-/* overflow:initial lets the arrows and the pagination (bottom:-2.5rem) sit outside the
-   container. The side effect was that every off-screen carousel slide pushed the page
-   wider, so the whole document had a horizontal scrollbar at almost every width. */
+/* overflow:initial lets the arrows sit outside the container. The side effect was that
+   every off-screen carousel slide pushed the page wider, so the whole document had a
+   horizontal scrollbar at almost every width. */
 .highlight__container{
   overflow: initial;
 }
 
 /* Below 1200px the arrows sit just .5rem outside the container, so the slides can be
    clipped horizontally while a .5rem bleed keeps the arrows whole. overflow-y stays
-   visible so the pagination below the carousel still shows. `clip` not `hidden`, so no
-   scroll container is created and Swiper's cssMode is unaffected.
+   visible. `clip` not `hidden`, so no scroll container is created and Swiper's cssMode
+   is unaffected.
    At 1200px and above the arrows are pulled a full 3.5rem out, and the viewport is
    wide enough that the slides no longer overflow the page — so no clip is needed. */
 @media screen and (max-width: 1199px){
@@ -479,8 +479,14 @@ p.section__subtitle{
   right: -.5rem;
 }
 
+/* In the page flow, not absolutely positioned below the container as Swiper has it.
+   Positioned that way the dots took up no space, so once the multi-page split left a
+   carousel as the last thing before the footer (home, media) they landed on the footer.
+   In flow they reserve their own room, whatever follows the carousel. */
 .swiper-container-horizontal > .swiper-pagination-bullets{
-  bottom: -2.5rem;
+  position: relative;
+  bottom: auto;
+  margin-top: 1rem;
 }
 
 /* Swiper's own class is bullet-active (singular); the plural form never matched,
@@ -1431,7 +1437,7 @@ html.dark-theme-preload .tag--organic-chemistry {
     font-size: 3.5rem;
   }
   .swiper-container-horizontal > .swiper-pagination-bullets{
-    bottom: -4.5rem;
+    margin-top: 3rem;
   }
   .about__researchinterestimg {
     width: 650px;
